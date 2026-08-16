@@ -31,15 +31,18 @@ export const metadata: Metadata = {
     "Next.js Developer",
     "AI Agents Developer",
   ],
-  authors: [{ name: "Abadurrahman", url: "https://techviman.com/" }],
+  authors: [{ name: "Abadurrahman", url: "https://abad-ur-rahman.vercel.app/" }],
   creator: "Abadurrahman",
   publisher: "TECHVIMAN",
-  metadataBase: new URL("https://techviman.com"),
+  metadataBase: new URL("https://abad-ur-rahman.vercel.app"),
+  alternates: {
+    canonical: "https://abad-ur-rahman.vercel.app",
+  },
   openGraph: {
     title: "Abadurrahman — Developer, Entrepreneur & Startup Founder",
     description:
       "Digital Headquarters of Abadurrahman. Founder of TECHVIMAN, creator of AR Menu and AI applications.",
-    url: "https://techviman.com/",
+    url: "https://abad-ur-rahman.vercel.app/",
     siteName: "Abadurrahman Platform & TECHVIMAN",
     locale: "en_US",
     type: "website",

@@ -45,17 +45,46 @@ export default function HomePage() {
       ? projectsData
       : projectsData.filter((p) => p.category === activeProjectCategory);
 
-  const handleContactSubmit = (e: React.FormEvent) => {
+  const [formError, setFormError] = useState("");
+
+  const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!contactForm.name || !contactForm.email || !contactForm.message) return;
 
     setIsSubmitting(true);
-    setTimeout(() => {
+    setFormError("");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "cb019df1-9b5c-4089-b680-f4d73c9629c0",
+          name: contactForm.name,
+          email: contactForm.email,
+          subject: contactForm.subject || `Homepage Inquiry from ${contactForm.name}`,
+          message: contactForm.message,
+          from_name: "Abadurrahman Portfolio Homepage",
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setFormSubmitted(true);
+        confetti({ particleCount: 80, spread: 70, origin: { y: 0.7 } });
+        setContactForm({ name: "", email: "", subject: "", message: "" });
+      } else {
+        setFormError(result.message || "Submission failed. Please try again.");
+      }
+    } catch (err) {
+      setFormError("Network error occurred. Please try again.");
+    } finally {
       setIsSubmitting(false);
-      setFormSubmitted(true);
-      confetti({ particleCount: 70, spread: 60, origin: { y: 0.7 } });
-      setContactForm({ name: "", email: "", subject: "", message: "" });
-    }, 800);
+    }
   };
 
   return (
