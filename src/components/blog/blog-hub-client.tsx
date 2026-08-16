@@ -3,13 +3,59 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { blogPosts, blogCategories } from "@/data/blog";
-import { ArrowRight, Calendar, Clock, Rss, BookOpen, Sparkles, LayoutGrid, List, CheckCircle2, Terminal } from "lucide-react";
+import { ArrowRight, Calendar, Clock, Rss, BookOpen, Sparkles, LayoutGrid, List, CheckCircle2, Terminal, AlertCircle, Loader2 } from "lucide-react";
 import { formatDate } from "@/lib/utils";
+import confetti from "canvas-confetti";
 
 export function BlogHubClient() {
   const [activeTab, setActiveTab] = useState<"all" | "pillars" | "quick">("all");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [showWorkflowGuide, setShowWorkflowGuide] = useState(false);
+
+  // Newsletter Subscription States
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterSubmitted, setNewsletterSubmitted] = useState(false);
+  const [newsletterLoading, setNewsletterLoading] = useState(false);
+  const [newsletterError, setNewsletterError] = useState("");
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newsletterEmail || !newsletterEmail.includes("@")) return;
+
+    setNewsletterLoading(true);
+    setNewsletterError("");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "cb019df1-9b5c-4089-b680-f4d73c9629c0",
+          email: newsletterEmail,
+          subject: "New Daily Newsletter Subscriber — Abadurrahman Knowledge Platform",
+          message: `New subscriber email: ${newsletterEmail}`,
+          from_name: "Abadurrahman Daily Newsletter",
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setNewsletterSubmitted(true);
+        confetti({ particleCount: 80, spread: 70, origin: { y: 0.8 } });
+        setNewsletterEmail("");
+      } else {
+        setNewsletterError(result.message || "Failed to subscribe. Please try again.");
+      }
+    } catch (err) {
+      setNewsletterError("Network error occurred. Please check your connection.");
+    } finally {
+      setNewsletterLoading(false);
+    }
+  };
 
   const featuredPost = blogPosts.find((p) => p.featured) || blogPosts[0];
   
@@ -264,27 +310,63 @@ export function BlogHubClient() {
         )}
       </div>
 
-      {/* Professional Daily Newsletter Sign-Up */}
+      {/* Fully Functional Daily Newsletter Sign-Up */}
       <div className="glass-card p-8 sm:p-12 rounded-3xl border border-slate-800 bg-slate-950/90 text-center space-y-4 max-w-3xl mx-auto">
         <h2 className="text-2xl font-bold text-white">RECEIVE DAILY ARTICLES IN YOUR INBOX</h2>
         <p className="text-xs text-slate-300 max-w-lg mx-auto">
           Get Abadurrahman's daily tech insights, WebAR code breakdowns, AI agent experiments, and startup founder lessons delivered every morning.
         </p>
 
-        <form onSubmit={(e) => e.preventDefault()} className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto pt-2">
-          <input
-            type="email"
-            placeholder="Enter your email address..."
-            className="flex-1 px-4 py-2.5 rounded-full bg-slate-900 border border-slate-800 text-xs text-slate-100 focus:outline-none focus:border-blue-500 transition"
-          />
-          <button
-            type="submit"
-            className="px-6 py-2.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition shadow-md shadow-blue-500/20"
-          >
-            Subscribe Daily
-          </button>
-        </form>
+        {newsletterSubmitted ? (
+          <div className="p-6 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center space-y-2 max-w-md mx-auto animate-in fade-in duration-300">
+            <CheckCircle2 className="w-10 h-10 text-emerald-400 mx-auto" />
+            <p className="text-sm font-bold text-white">You're Subscribed!</p>
+            <p className="text-xs text-slate-300">
+              Thank you for subscribing. You will now receive every daily article directly in your inbox.
+            </p>
+            <button
+              onClick={() => setNewsletterSubmitted(false)}
+              className="text-[11px] font-mono text-slate-400 hover:text-white underline pt-1"
+            >
+              Subscribe another email
+            </button>
+          </div>
+        ) : (
+          <form onSubmit={handleNewsletterSubmit} className="space-y-3 max-w-md mx-auto pt-2">
+            {newsletterError && (
+              <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs flex items-center justify-center gap-1.5">
+                <AlertCircle className="w-4 h-4 shrink-0" />
+                <span>{newsletterError}</span>
+              </div>
+            )}
+
+            <div className="flex flex-col sm:flex-row gap-2">
+              <input
+                type="email"
+                required
+                placeholder="Enter your email address..."
+                value={newsletterEmail}
+                onChange={(e) => setNewsletterEmail(e.target.value)}
+                className="flex-1 px-4 py-2.5 rounded-full bg-slate-900 border border-slate-800 text-xs text-slate-100 focus:outline-none focus:border-blue-500 transition"
+              />
+              <button
+                type="submit"
+                disabled={newsletterLoading}
+                className="px-6 py-2.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition shadow-md shadow-blue-500/20 disabled:opacity-50 flex items-center justify-center gap-1.5 cursor-pointer shrink-0"
+              >
+                {newsletterLoading ? (
+                  <>
+                    <Loader2 className="w-3.5 h-3.5 animate-spin" /> Subscribing...
+                  </>
+                ) : (
+                  "Subscribe Daily"
+                )}
+              </button>
+            </div>
+          </form>
+        )}
       </div>
     </div>
   );
 }
+
