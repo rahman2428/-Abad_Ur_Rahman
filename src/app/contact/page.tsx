@@ -143,7 +143,7 @@ export default function ContactPage() {
                 <input
                   type="text"
                   required
-                  placeholder="e.g. Alex Rivera"
+                  placeholder="e.g. Abad Ur Rahman"
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-sm text-slate-100 focus:outline-none focus:border-blue-500 transition"
@@ -155,7 +155,7 @@ export default function ContactPage() {
                 <input
                   type="email"
                   required
-                  placeholder="e.g. alex@company.com"
+                  placeholder="e.g. abadurrahman@example.com"
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                   className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-sm text-slate-100 focus:outline-none focus:border-blue-500 transition"
