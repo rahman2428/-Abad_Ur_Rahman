@@ -17,6 +17,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  verification: {
+    google: "gPPd8o-tkNTQATYNxiVGTdLDcDcejFSWZki-OLEh-uM",
+  },
   title: "Abadurrahman — Developer, Entrepreneur & Technology Builder",
   description:
     "Official digital headquarters of Abadurrahman — Computer Science Engineering student, web developer, startup founder of TECHVIMAN, building WebAR products, AI tools, SaaS apps, and publishing daily SEO technology insights.",
@@ -34,15 +37,15 @@ export const metadata: Metadata = {
   authors: [{ name: "Abadurrahman", url: "https://abad-ur-rahman.vercel.app/" }],
   creator: "Abadurrahman",
   publisher: "TECHVIMAN",
-  metadataBase: new URL("https://abad-ur-rahman.vercel.app"),
+  metadataBase: new URL("https://techviman.com"),
   alternates: {
-    canonical: "https://abad-ur-rahman.vercel.app",
+    canonical: "https://techviman.com",
   },
   openGraph: {
     title: "Abadurrahman — Developer, Entrepreneur & Startup Founder",
     description:
       "Digital Headquarters of Abadurrahman. Founder of TECHVIMAN, creator of AR Menu and AI applications.",
-    url: "https://abad-ur-rahman.vercel.app/",
+    url: "https://techviman.com/",
     siteName: "Abadurrahman Platform & TECHVIMAN",
     locale: "en_US",
     type: "website",
