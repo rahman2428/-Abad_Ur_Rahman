@@ -106,7 +106,7 @@ export default function HomePage() {
             </h1>
 
             <p className="text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed">
-              I'm Abadurrahman — a developer and entrepreneur focused on building web applications, AI-powered products, immersive WebAR experiences, and technology-driven businesses.
+              I am Abadurrahman, CEO of TECHVIMAN — a developer and entrepreneur building web applications, AI-powered products, immersive WebAR experiences, and technology-driven businesses.
             </p>
 
             {/* 4 Call to Actions */}

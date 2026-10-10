@@ -20,11 +20,18 @@ export const metadata: Metadata = {
   verification: {
     google: "gPPd8o-tkNTQATYNxiVGTdLDcDcejFSWZki-OLEh-uM",
   },
-  title: "Abadurrahman — Developer, Entrepreneur & Technology Builder",
+  title: "Abadurrahman | TECHVIMAN CEO, Developer & Entrepreneur",
   description:
-    "Official digital headquarters of Abadurrahman — Computer Science Engineering student, web developer, startup founder of TECHVIMAN, building WebAR products, AI tools, SaaS apps, and publishing daily SEO technology insights.",
+    "Meet Abadurrahman, CEO of TECHVIMAN, computer science engineering student, developer, and entrepreneur building WebAR products, AI tools, and SaaS applications.",
   keywords: [
     "Abadurrahman",
+    "ABADURRAHMAN",
+    "abadurrahman",
+    "Abadurahman",
+    "ABAD UR RAHMAN",
+    "abad ur rahman",
+    "abadur rahman",
+    "TECHVIMAN CEO",
     "TECHVIMAN",
     "WebAR Menu",
     "Computer Science Engineer",
@@ -42,9 +49,9 @@ export const metadata: Metadata = {
     canonical: "https://techviman.com",
   },
   openGraph: {
-    title: "Abadurrahman — Developer, Entrepreneur & Startup Founder",
+    title: "Abadurrahman | TECHVIMAN CEO, Developer & Entrepreneur",
     description:
-      "Digital Headquarters of Abadurrahman. Founder of TECHVIMAN, creator of AR Menu and AI applications.",
+      "Abadurrahman is CEO of TECHVIMAN, building WebAR products, AI tools, and SaaS applications.",
     url: "https://techviman.com/",
     siteName: "Abadurrahman Platform & TECHVIMAN",
     locale: "en_US",
@@ -52,8 +59,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Abadurrahman — Developer & Startup Founder",
-    description: "Building WebAR products, AI tools, SaaS apps, and scaling TECHVIMAN.",
+    title: "Abadurrahman | TECHVIMAN CEO",
+    description: "CEO of TECHVIMAN, building WebAR products, AI tools, and SaaS applications.",
     creator: "@abadurrahman",
   },
   robots: {
