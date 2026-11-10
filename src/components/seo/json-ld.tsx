@@ -14,16 +14,7 @@ export const personSchema = {
   "@type": "Person",
   "@id": personId,
   name: "Abadurrahman",
-  // alternateName: ["ABADURRAHMAN", "Abad Ur Rahman", SITE_AUTHOR],
-
-
-  alternateName: [
-  "ABADURRAHMAN",
-  "Abad Ur Rahman",
-  "abad-ur-rahman.vercel.app"
-],
-
-
+  alternateName: ["ABADURRAHMAN", "abadurrahman", "Abadurrahman", "Abad Ur Rahman", SITE_AUTHOR],
   jobTitle: "CEO of TECHVIMAN, Developer & Entrepreneur",
   description: SITE_DESCRIPTION,
   url: `${SITE_URL}/`,
