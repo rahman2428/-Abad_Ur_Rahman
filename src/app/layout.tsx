@@ -41,22 +41,47 @@ export const metadata: Metadata = {
     "Next.js Developer",
     "AI Agents Developer",
   ],
-  authors: [{ name: "Abadurrahman", url: "https://abad-ur-rahman.vercel.app/" }],
-  creator: "Abadurrahman",
-  publisher: "TECHVIMAN",
-  metadataBase: new URL("https://techviman.com"),
+  // authors: [{ name: "Abadurrahman", url: "https://abad-ur-rahman.vercel.app/" }],
+  // creator: "Abadurrahman",
+  // publisher: "TECHVIMAN",
+
+authors: [
+  {
+    name: "ABADURRAHMAN",
+    url: "https://abad-ur-rahman.vercel.app/"
+  }
+],
+creator: "ABADURRAHMAN",
+publisher: "ABADURRAHMAN",
+
+
+  metadataBase: new URL("https://abad-ur-rahman.vercel.app"),
   alternates: {
     canonical: "https://techviman.com",
   },
-  openGraph: {
-    title: "Abadurrahman | TECHVIMAN CEO, Developer & Entrepreneur",
-    description:
-      "Abadurrahman is CEO of TECHVIMAN, building WebAR products, AI tools, and SaaS applications.",
-    url: "https://techviman.com/",
-    siteName: "Abadurrahman Platform & TECHVIMAN",
-    locale: "en_US",
-    type: "website",
-  },
+  // openGraph: {
+  //   title: "Abadurrahman | TECHVIMAN CEO, Developer & Entrepreneur",
+  //   description:
+  //     "Abadurrahman is CEO of TECHVIMAN, building WebAR products, AI tools, and SaaS applications.",
+  //   url: "https://techviman.com/",
+  //   siteName: "Abadurrahman Platform & TECHVIMAN",
+  //   locale: "en_US",
+  //   type: "website",
+  // },
+
+openGraph: {
+  title: "ABADURRAHMAN | TECHVIMAN CEO, Developer & Entrepreneur",
+  description:
+    "Official portfolio of Abadurrahman, CEO of TECHVIMAN, developer and entrepreneur.",
+  url: "https://abad-ur-rahman.vercel.app/",
+  siteName: "Abadurrahman",
+  locale: "en_IN",
+  type: "website",
+},
+
+
+
+
   twitter: {
     card: "summary_large_image",
     title: "Abadurrahman | TECHVIMAN CEO",
@@ -67,16 +92,26 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  // icons: {
+  //   icon: [
+  //     { url: "/icon.png", type: "image/png" },
+  //     { url: "/favicon.ico" },
+  //   ],
+  //   shortcut: ["/icon.png"],
+  //   apple: [
+  //     { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+  //   ],
+  // },
+
+
   icons: {
-    icon: [
-      { url: "/icon.png", type: "image/png" },
-      { url: "/favicon.ico" },
-    ],
-    shortcut: ["/icon.png"],
-    apple: [
-      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
-    ],
-  },
+  icon: [
+    { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" }
+  ],
+  apple: "/apple-touch-icon.png"
+},
+
 };
 
 export default function RootLayout({
