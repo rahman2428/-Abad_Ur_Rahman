@@ -106,7 +106,7 @@ export default function HomePage() {
             </h1>
 
             <p className="text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed">
-              I am Abadurrahman, CEO of TECHVIMAN — a developer and entrepreneur building web applications, AI-powered products, immersive WebAR experiences, and technology-driven businesses.
+              This is the official personal portfolio of Abadurrahman, CEO of TECHVIMAN — a computer science engineering student, developer, and entrepreneur building web applications, AI-powered products, immersive WebAR experiences, and technology-driven businesses.
             </p>
 
             {/* 4 Call to Actions */}
@@ -144,16 +144,16 @@ export default function HomePage() {
             <div className="pt-4 flex items-center gap-4 border-t border-slate-800/80">
               <span className="text-xs text-slate-400 font-mono">Connect:</span>
               <div className="flex items-center gap-3 text-slate-400">
-                <a href="https://github.com/rahman2428" target="_blank" rel="noopener noreferrer" className="hover:text-white transition p-2 rounded-lg bg-slate-900 border border-slate-800">
+                <a href="https://github.com/rahman2428" target="_blank" rel="noopener noreferrer" aria-label="Abadurrahman on GitHub" className="hover:text-white transition p-2 rounded-lg bg-slate-900 border border-slate-800">
                   <IconGithub className="w-4 h-4" />
                 </a>
-                <a href="https://www.linkedin.com/in/abadur-rahman-056582312/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition p-2 rounded-lg bg-slate-900 border border-slate-800">
+                <a href="https://www.linkedin.com/in/abadur-rahman-056582312/" target="_blank" rel="noopener noreferrer" aria-label="Abadurrahman on LinkedIn" className="hover:text-white transition p-2 rounded-lg bg-slate-900 border border-slate-800">
                   <IconLinkedin className="w-4 h-4" />
                 </a>
-                <a href="https://techviman.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition p-2 rounded-lg bg-slate-900 border border-slate-800">
+                <a href="https://techviman.com/" target="_blank" rel="noopener noreferrer" aria-label="TECHVIMAN official website founded by Abadurrahman" className="hover:text-white transition p-2 rounded-lg bg-slate-900 border border-slate-800">
                   <Globe className="w-4 h-4" />
                 </a>
-                <a href="mailto:contact@techviman.com" className="hover:text-white transition p-2 rounded-lg bg-slate-900 border border-slate-800">
+                <a href="mailto:contact@techviman.com" aria-label="Email Abadurrahman at contact@techviman.com" className="hover:text-white transition p-2 rounded-lg bg-slate-900 border border-slate-800">
                   <Mail className="w-4 h-4" />
                 </a>
               </div>
@@ -224,7 +224,7 @@ export default function HomePage() {
               <p className="text-lg font-medium text-slate-300">Building Technology. Creating Possibilities.</p>
 
               <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-                {techvimanData.about}
+                TECHVIMAN is the technology startup founded and led by Abadurrahman. {techvimanData.about}
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">

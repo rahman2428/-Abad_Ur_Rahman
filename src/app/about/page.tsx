@@ -1,14 +1,14 @@
 import React from "react";
-import Metadata from "next";
 import { personalProfile } from "@/data/profile";
 import { GraduationCap, Code, Rocket, CheckCircle2, Sparkles, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata = {
-  title: "About Abadurrahman — Developer, Entrepreneur & Tech Builder",
-  description:
-    "Learn about Abadurrahman: Computer Science Engineering student, founder of TECHVIMAN, web developer, AI enthusiast, and software product creator.",
-};
+export const metadata = pageMetadata(
+  "/about",
+  "About Abadurrahman — Developer, Entrepreneur & Tech Builder",
+  "Learn about Abadurrahman: Computer Science Engineering student, founder of TECHVIMAN, web developer, AI enthusiast, and software product creator."
+);
 
 export default function AboutPage() {
   const { aboutSection, philosophy, exploring } = personalProfile;

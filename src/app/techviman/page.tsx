@@ -3,11 +3,13 @@ import { techvimanData } from "@/data/techviman";
 import { Sparkles, Globe, ExternalLink, CheckCircle2, ArrowRight, Layers, Cpu, Box, Rocket } from "lucide-react";
 import Link from "next/link";
 
-export const metadata = {
-  title: "TECHVIMAN — Building Technology Products & Digital Solutions",
-  description:
-    "Official startup profile of TECHVIMAN: Founded by Abadurrahman. Building WebAR products, AI tools, SaaS applications, and modern digital software.",
-};
+import { pageMetadata } from "@/lib/site";
+
+export const metadata = pageMetadata(
+  "/techviman",
+  "TECHVIMAN — Building Technology Products & Digital Solutions",
+  "Official startup profile of TECHVIMAN: Founded by Abadurrahman. Building WebAR products, AI tools, SaaS applications, and modern digital software."
+);
 
 export default function TechvimanPage() {
   return (

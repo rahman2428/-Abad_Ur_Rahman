@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, ExternalLink, CheckCircle2, AlertCircle, Sparkles, Layers } from "lucide-react";
 import { IconGithub } from "@/components/ui/icons";
+import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/site";
 
 interface CaseStudyPageProps {
   params: Promise<{
@@ -15,6 +17,19 @@ export async function generateStaticParams() {
   return projectsData.map((project) => ({
     slug: project.slug,
   }));
+}
+
+export async function generateMetadata({ params }: CaseStudyPageProps): Promise<Metadata> {
+  const resolvedParams = await params;
+  const project = projectsData.find((p) => p.slug === resolvedParams.slug);
+
+  if (!project) return {};
+
+  return pageMetadata(
+    `/projects/${project.slug}`,
+    `${project.title} — Abadurrahman Case Study`,
+    project.shortDescription
+  );
 }
 
 export default async function CaseStudyPage({ params }: CaseStudyPageProps) {

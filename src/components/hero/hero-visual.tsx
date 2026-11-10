@@ -134,8 +134,16 @@ export function HeroVisual() {
   }, []);
 
   return (
-    <div className="relative w-full h-full min-h-[380px] lg:min-h-[480px] rounded-3xl overflow-hidden glass-card flex items-center justify-center p-4 border border-slate-800/80 bg-slate-950/60 shadow-2xl">
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" />
+    <div
+      className="relative w-full h-full min-h-[380px] lg:min-h-[480px] rounded-3xl overflow-hidden glass-card flex items-center justify-center p-4 border border-slate-800/80 bg-slate-950/60 shadow-2xl"
+      role="img"
+      aria-label="Interactive product overview of Abadurrahman's TECHVIMAN work, including WebAR restaurant menus, AI background removal, and SaaS products"
+    >
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        aria-hidden="true"
+      />
 
       {/* Floating Interactive 3D Card Visual Stack */}
       <div className="relative z-10 w-full max-w-sm space-y-3">

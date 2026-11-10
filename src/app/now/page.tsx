@@ -3,11 +3,13 @@ import { labExperiments } from "@/data/lab";
 import { Clock, Activity, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
-export const metadata = {
-  title: "Now / Currently Building — Abadurrahman",
-  description:
-    "Real-time building status tracker of Abadurrahman: Current software builds, WebAR updates, AI research, and daily focus area.",
-};
+import { pageMetadata } from "@/lib/site";
+
+export const metadata = pageMetadata(
+  "/now",
+  "Now / Currently Building — Abadurrahman",
+  "Real-time building status tracker of Abadurrahman: Current software builds, WebAR updates, AI research, and daily focus area."
+);
 
 export default function NowPage() {
   return (

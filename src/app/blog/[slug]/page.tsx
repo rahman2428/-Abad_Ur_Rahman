@@ -5,7 +5,8 @@ import Link from "next/link";
 import { ArrowLeft, Calendar, Clock, BookOpen, Tag, Share2, Globe, ChevronRight } from "lucide-react";
 import { IconGithub, IconLinkedin } from "@/components/ui/icons";
 import { formatDate } from "@/lib/utils";
-import Metadata from "next";
+import type { Metadata } from "next";
+import { SITE_NAME, SITE_URL, absoluteUrl } from "@/lib/site";
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -19,21 +20,21 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: BlogPostPageProps) {
+export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const resolvedParams = await params;
   const post = blogPosts.find((p) => p.slug === resolvedParams.slug);
 
   if (!post) return {};
 
-  const articleUrl = `https://techviman.com/blog/${post.slug}`;
+  const articleUrl = absoluteUrl(`/blog/${post.slug}`);
 
   return {
     title: `${post.title} — Abadurrahman Knowledge Platform`,
     description: post.description,
     keywords: post.keywords,
-    authors: [{ name: post.author.name, url: "https://techviman.com/" }],
+    authors: [{ name: post.author.name, url: `${SITE_URL}/` }],
     creator: post.author.name,
-    publisher: "TECHVIMAN",
+    publisher: SITE_NAME,
     alternates: {
       canonical: articleUrl,
     },
@@ -41,7 +42,7 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
       title: post.title,
       description: post.description,
       url: articleUrl,
-      siteName: "Abadurrahman Daily Knowledge Platform",
+      siteName: SITE_NAME,
       images: [
         {
           url: post.coverImage,
@@ -50,7 +51,7 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
           alt: post.title,
         },
       ],
-      locale: "en_US",
+      locale: "en_IN",
       type: "article",
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt || post.publishedAt,
@@ -91,9 +92,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const nextPost = currentIndex < blogPosts.length - 1 ? blogPosts[currentIndex + 1] : null;
 
   const relatedArticles = blogPosts.filter((p) => p.slug !== post.slug).slice(0, 3);
-  const articleUrl = `https://techviman.com/blog/${post.slug}`;
+  const articleUrl = absoluteUrl(`/blog/${post.slug}`);
+  const categorySlug = post.category.toLowerCase().replace(/[^a-z0-9]/g, "-");
 
-  // Rich Multi-Entity JSON-LD Schema for Google Search
   const jsonLdGraph = {
     "@context": "https://schema.org",
     "@graph": [
@@ -105,33 +106,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         image: [post.coverImage],
         datePublished: post.publishedAt,
         dateModified: post.updatedAt || post.publishedAt,
-        inLanguage: "en-US",
+        inLanguage: "en-IN",
         mainEntityOfPage: {
           "@type": "WebPage",
           "@id": articleUrl,
         },
-        author: {
-          "@type": "Person",
-          name: post.author.name,
-          jobTitle: "Computer Science Engineer & Startup Founder",
-          url: "https://techviman.com/",
-          sameAs: [
-            "https://github.com/rahman2428",
-            "https://www.linkedin.com/in/abadur-rahman-056582312/",
-            "https://techviman.com/",
-          ],
-        },
-        publisher: {
-          "@type": "Organization",
-          name: "TECHVIMAN",
-          url: "https://techviman.com/",
-          logo: {
-            "@type": "ImageObject",
-            url: "https://techviman.com/favicon.ico",
-          },
-        },
+        author: { "@id": `${SITE_URL}/#person` },
+        publisher: { "@id": `${SITE_URL}/#person` },
         keywords: post.keywords.join(", "),
         articleSection: post.category,
+        url: articleUrl,
       },
       {
         "@type": "BreadcrumbList",
@@ -141,19 +125,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             "@type": "ListItem",
             position: 1,
             name: "Home",
-            item: "https://techviman.com",
+            item: `${SITE_URL}/`,
           },
           {
             "@type": "ListItem",
             position: 2,
             name: "Knowledge Platform",
-            item: "https://techviman.com/blog",
+            item: `${SITE_URL}/blog`,
           },
           {
             "@type": "ListItem",
             position: 3,
             name: post.category,
-            item: `https://techviman.com/blog/category/${post.category.toLowerCase().replace(/[^a-z0-9]/g, "-")}`,
+            item: `${SITE_URL}/blog/category/${categorySlug}`,
           },
           {
             "@type": "ListItem",

@@ -1,11 +1,13 @@
 import React from "react";
 import { BlogHubClient } from "@/components/blog/blog-hub-client";
 
-export const metadata = {
-  title: "Daily Knowledge Platform — Abadurrahman • Build, Code & Business",
-  description:
-    "Daily technology, WebAR, AI tools, programming, and startup lessons published by Abadurrahman. Complete daily SEO knowledge hub for developers and entrepreneurs.",
-};
+import { pageMetadata } from "@/lib/site";
+
+export const metadata = pageMetadata(
+  "/blog",
+  "Daily Knowledge Platform — Abadurrahman • Build, Code & Business",
+  "Daily technology, WebAR, AI tools, programming, and startup lessons published by Abadurrahman. Complete daily SEO knowledge hub for developers and entrepreneurs."
+);
 
 export default function BlogHubPage() {
   return (

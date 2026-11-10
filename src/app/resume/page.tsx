@@ -3,11 +3,13 @@ import { personalProfile } from "@/data/profile";
 import { Download, ExternalLink, GraduationCap, Briefcase, Code, Award, Mail } from "lucide-react";
 import { IconGithub, IconLinkedin } from "@/components/ui/icons";
 
-export const metadata = {
-  title: "Resume — Abadurrahman",
-  description:
-    "Interactive resume profile of Abadurrahman: Computer Science Engineering student, web developer, startup founder of TECHVIMAN.",
-};
+import { pageMetadata } from "@/lib/site";
+
+export const metadata = pageMetadata(
+  "/resume",
+  "Resume — Abadurrahman",
+  "Interactive resume profile of Abadurrahman: Computer Science Engineering student, web developer, startup founder of TECHVIMAN."
+);
 
 export default function ResumePage() {
   return (

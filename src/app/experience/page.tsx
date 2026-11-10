@@ -2,11 +2,13 @@ import React from "react";
 import { experienceData } from "@/data/experience";
 import { Briefcase, GraduationCap, Award, ExternalLink, CheckCircle2, Rocket } from "lucide-react";
 
-export const metadata = {
-  title: "Experience & Timeline — Abadurrahman",
-  description:
-    "Chronological timeline of Abadurrahman: Education (B.Tech Computer Science Engineering), TECHVIMAN startup founder, product launches, hackathons, and achievements.",
-};
+import { pageMetadata } from "@/lib/site";
+
+export const metadata = pageMetadata(
+  "/experience",
+  "Experience & Timeline — Abadurrahman",
+  "Chronological timeline of Abadurrahman: Education (B.Tech Computer Science Engineering), TECHVIMAN startup founder, product launches, hackathons, and achievements."
+);
 
 export default function ExperiencePage() {
   return (

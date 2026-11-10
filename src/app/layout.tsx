@@ -5,6 +5,16 @@ import { ThemeProvider } from "@/components/ui/theme-context";
 import { Navbar } from "@/components/navigation/navbar";
 import { Footer } from "@/components/navigation/footer";
 import { CustomCursor } from "@/components/ui/custom-cursor";
+import { SiteJsonLd } from "@/components/seo/json-ld";
+import {
+  SITE_AUTHOR,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_OG_DESCRIPTION,
+  SITE_TITLE,
+  SITE_URL,
+  absoluteUrl,
+} from "@/lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,20 +27,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  verification: {
-    google: "gPPd8o-tkNTQATYNxiVGTdLDcDcejFSWZki-OLEh-uM",
-  },
-  title: "Abadurrahman | TECHVIMAN CEO, Developer & Entrepreneur",
-  description:
-    "Meet Abadurrahman, CEO of TECHVIMAN, computer science engineering student, developer, and entrepreneur building WebAR products, AI tools, and SaaS applications.",
+  metadataBase: new URL(SITE_URL),
+  applicationName: SITE_NAME,
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
   keywords: [
     "Abadurrahman",
     "ABADURRAHMAN",
-    "abadurrahman",
-    "Abadurahman",
-    "ABAD UR RAHMAN",
-    "abad ur rahman",
-    "abadur rahman",
+    "Abad Ur Rahman",
     "TECHVIMAN CEO",
     "TECHVIMAN",
     "WebAR Menu",
@@ -41,77 +45,61 @@ export const metadata: Metadata = {
     "Next.js Developer",
     "AI Agents Developer",
   ],
-  // authors: [{ name: "Abadurrahman", url: "https://abad-ur-rahman.vercel.app/" }],
-  // creator: "Abadurrahman",
-  // publisher: "TECHVIMAN",
-
-authors: [
-  {
-    name: "ABADURRAHMAN",
-    url: "https://abad-ur-rahman.vercel.app/"
-  }
-],
-creator: "ABADURRAHMAN",
-publisher: "ABADURRAHMAN",
-
-
-  metadataBase: new URL("https://abad-ur-rahman.vercel.app"),
-  alternates: {
-    canonical: "https://techviman.com",
+  authors: [{ name: SITE_AUTHOR, url: `${SITE_URL}/` }],
+  creator: SITE_AUTHOR,
+  publisher: SITE_AUTHOR,
+  category: "portfolio",
+  verification: {
+    google: "gPPd8o-tkNTQATYNxiVGTdLDcDcejFSWZki-OLEh-uM",
   },
-  // openGraph: {
-  //   title: "Abadurrahman | TECHVIMAN CEO, Developer & Entrepreneur",
-  //   description:
-  //     "Abadurrahman is CEO of TECHVIMAN, building WebAR products, AI tools, and SaaS applications.",
-  //   url: "https://techviman.com/",
-  //   siteName: "Abadurrahman Platform & TECHVIMAN",
-  //   locale: "en_US",
-  //   type: "website",
-  // },
-
-openGraph: {
-  title: "ABADURRAHMAN | TECHVIMAN CEO, Developer & Entrepreneur",
-  description:
-    "Official portfolio of Abadurrahman, CEO of TECHVIMAN, developer and entrepreneur.",
-  url: "https://abad-ur-rahman.vercel.app/",
-  siteName: "Abadurrahman",
-  locale: "en_IN",
-  type: "website",
-},
-
-
-
-
+  alternates: {
+    canonical: `${SITE_URL}/`,
+  },
+  openGraph: {
+    title: SITE_TITLE,
+    description: SITE_OG_DESCRIPTION,
+    url: `${SITE_URL}/`,
+    siteName: SITE_NAME,
+    locale: "en_IN",
+    type: "website",
+    images: [
+      {
+        url: absoluteUrl("/android-chrome-512x512.png"),
+        width: 512,
+        height: 512,
+        alt: "Abadurrahman personal brand logo",
+      },
+    ],
+  },
   twitter: {
     card: "summary_large_image",
-    title: "Abadurrahman | TECHVIMAN CEO",
-    description: "CEO of TECHVIMAN, building WebAR products, AI tools, and SaaS applications.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     creator: "@abadurrahman",
+    images: [absoluteUrl("/android-chrome-512x512.png")],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
-  // icons: {
-  //   icon: [
-  //     { url: "/icon.png", type: "image/png" },
-  //     { url: "/favicon.ico" },
-  //   ],
-  //   shortcut: ["/icon.png"],
-  //   apple: [
-  //     { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
-  //   ],
-  // },
-
-
   icons: {
-  icon: [
-    { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-    { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" }
-  ],
-  apple: "/apple-touch-icon.png"
-},
-
+    icon: [
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
+      { url: "/android-chrome-512x512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+    shortcut: ["/favicon-32x32.png"],
+  },
+  manifest: "/site.webmanifest",
 };
 
 export default function RootLayout({
@@ -125,13 +113,8 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <head>
-        <link rel="icon" href="/icon.png" type="image/png" sizes="any" />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/apple-icon.png" />
-        <link rel="shortcut icon" href="/icon.png" />
-      </head>
       <body className="min-h-full flex flex-col bg-slate-950 text-slate-100 selection:bg-blue-500 selection:text-white">
+        <SiteJsonLd />
         <ThemeProvider>
           <CustomCursor />
           <Navbar />

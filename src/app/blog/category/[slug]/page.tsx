@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, BookOpen } from "lucide-react";
 import { formatDate } from "@/lib/utils";
+import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/site";
 
 interface CategoryPageProps {
   params: Promise<{
@@ -15,6 +17,19 @@ export async function generateStaticParams() {
   return blogCategories.map((c) => ({
     slug: c.slug,
   }));
+}
+
+export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
+  const resolvedParams = await params;
+  const categoryObj = blogCategories.find((c) => c.slug === resolvedParams.slug);
+
+  if (!categoryObj) return {};
+
+  return pageMetadata(
+    `/blog/category/${categoryObj.slug}`,
+    `${categoryObj.name} Articles — Abadurrahman`,
+    categoryObj.description
+  );
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {

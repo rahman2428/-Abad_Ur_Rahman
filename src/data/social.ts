@@ -38,7 +38,7 @@ export const socialLinks: SocialLink[] = [
   {
     id: "instagram",
     name: "Instagram",
-    url: "https://instagram.com/",
+    url: "https://www.instagram.com/abadurrahman/",
     handle: "@abadurrahman",
     iconName: "Instagram",
   },

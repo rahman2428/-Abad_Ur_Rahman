@@ -3,11 +3,13 @@ import { labExperiments } from "@/data/lab";
 import { Terminal, ExternalLink, Sparkles, Activity } from "lucide-react";
 import { IconGithub } from "@/components/ui/icons";
 
-export const metadata = {
-  title: "Technology Lab & Experiments — Abadurrahman",
-  description:
-    "Experimental technology lab of Abadurrahman: Autonomous AI agents, WebXR spatial viewers, WebAssembly image segmentation, developer tooling, and research prototypes.",
-};
+import { pageMetadata } from "@/lib/site";
+
+export const metadata = pageMetadata(
+  "/lab",
+  "Technology Lab & Experiments — Abadurrahman",
+  "Experimental technology lab of Abadurrahman: Autonomous AI agents, WebXR spatial viewers, WebAssembly image segmentation, developer tooling, and research prototypes."
+);
 
 export default function LabPage() {
   return (

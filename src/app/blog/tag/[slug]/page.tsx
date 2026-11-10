@@ -3,11 +3,24 @@ import { blogPosts } from "@/data/blog";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/site";
 
 interface TagPageProps {
   params: Promise<{
     slug: string;
   }>;
+}
+
+export async function generateMetadata({ params }: TagPageProps): Promise<Metadata> {
+  const resolvedParams = await params;
+  const tag = resolvedParams.slug;
+
+  return pageMetadata(
+    `/blog/tag/${tag}`,
+    `#${tag} — Abadurrahman Knowledge Platform`,
+    `Articles tagged with #${tag} across Abadurrahman's personal knowledge platform.`
+  );
 }
 
 export default async function TagPage({ params }: TagPageProps) {

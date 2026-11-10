@@ -78,7 +78,7 @@ export const blogPosts: BlogPost[] = [
     featured: true,
     pillar: true,
     draft: false,
-    canonicalUrl: "https://techviman.com/blog/ai-agents-the-next-evolution-of-artificial-intelligence",
+    canonicalUrl: "https://abad-ur-rahman.vercel.app/blog/ai-agents-the-next-evolution-of-artificial-intelligence",
     toc: [
       { id: "what-are-ai-agents", text: "What Are AI Agents?", level: 2 },
       { id: "how-do-ai-agents-work", text: "How Do AI Agents Work?", level: 2 },
@@ -249,7 +249,7 @@ Emerging Model:    Human → AI Agent → Tools → Actions → Result</code></p
     featured: false,
     pillar: true,
     draft: false,
-    canonicalUrl: "https://techviman.com/blog/how-i-built-an-immersive-webar-restaurant-menu",
+    canonicalUrl: "https://abad-ur-rahman.vercel.app/blog/how-i-built-an-immersive-webar-restaurant-menu",
     toc: [
       { id: "the-friction-in-traditional-dining", text: "The Friction in Traditional Dining", level: 2 },
       { id: "why-zero-install-webar", text: "Why Zero-Install WebAR Matters", level: 2 },
@@ -316,7 +316,7 @@ const modelSrc = isIOS ? '/assets/models/dish.usdz' : '/assets/models/dish.glb';
     featured: false,
     pillar: true,
     draft: false,
-    canonicalUrl: "https://techviman.com/blog/building-ai-powered-web-apps-with-nextjs-and-fastapi",
+    canonicalUrl: "https://abad-ur-rahman.vercel.app/blog/building-ai-powered-web-apps-with-nextjs-and-fastapi",
     toc: [
       { id: "the-modern-ai-stack", text: "The Modern AI Stack: Next.js + FastAPI", level: 2 },
       { id: "why-decouple-frontend-and-ml-services", text: "Why Decouple Frontend & ML Microservices", level: 2 },
@@ -378,7 +378,7 @@ class ProcessingRequest(BaseModel):
     featured: false,
     pillar: false,
     draft: false,
-    canonicalUrl: "https://techviman.com/blog/lessons-from-building-a-tech-startup-as-a-cs-student",
+    canonicalUrl: "https://abad-ur-rahman.vercel.app/blog/lessons-from-building-a-tech-startup-as-a-cs-student",
     toc: [
       { id: "code-is-a-means-not-the-end", text: "1. Code is a Means, Not the Final Destination", level: 2 },
       { id: "the-power-of-mvps", text: "2. The Power of Shipping MVPs Fast", level: 2 },

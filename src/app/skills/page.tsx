@@ -2,11 +2,13 @@ import React from "react";
 import { skillsData } from "@/data/skills";
 import { Cpu, Code, Layers, Sparkles, Terminal, Cloud, Server, Database } from "lucide-react";
 
-export const metadata = {
-  title: "Engineering Skills — Abadurrahman",
-  description:
-    "Categorized technical capabilities of Abadurrahman: Programming languages, frontend frameworks, backend APIs, AI/ML models, databases, tools, cloud, and emerging tech.",
-};
+import { pageMetadata } from "@/lib/site";
+
+export const metadata = pageMetadata(
+  "/skills",
+  "Engineering Skills — Abadurrahman",
+  "Categorized technical capabilities of Abadurrahman: Programming languages, frontend frameworks, backend APIs, AI/ML models, databases, tools, cloud, and emerging tech."
+);
 
 export default function SkillsPage() {
   return (
