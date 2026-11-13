@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { blogPosts, blogCategories } from "@/data/blog";
+import Image from "next/image";
+import { blogCategories, publishedBlogPosts } from "@/data/blog";
 import { ArrowRight, Calendar, Clock, Rss, BookOpen, Sparkles, LayoutGrid, List, CheckCircle2, Terminal, AlertCircle, Loader2 } from "lucide-react";
 import { formatDate } from "@/lib/utils";
 import confetti from "canvas-confetti";
@@ -35,9 +36,9 @@ export function BlogHubClient() {
         body: JSON.stringify({
           access_key: "cb019df1-9b5c-4089-b680-f4d73c9629c0",
           email: newsletterEmail,
-          subject: "New Daily Newsletter Subscriber — Abadurrahman Knowledge Platform",
+          subject: "New Newsletter Subscriber — Abadurrahman Blog",
           message: `New subscriber email: ${newsletterEmail}`,
-          from_name: "Abadurrahman Daily Newsletter",
+          from_name: "Abadurrahman Blog Newsletter",
         }),
       });
 
@@ -57,10 +58,10 @@ export function BlogHubClient() {
     }
   };
 
-  const featuredPost = blogPosts.find((p) => p.featured) || blogPosts[0];
+  const featuredPost =
+    publishedBlogPosts.find((post) => post.featured) || publishedBlogPosts[0];
   
-  const displayedPosts = blogPosts.filter((p) => {
-    if (p.draft) return false;
+  const displayedPosts = publishedBlogPosts.filter((p) => {
     if (activeTab === "pillars") return p.pillar;
     if (activeTab === "quick") return !p.pillar;
     return true;
@@ -68,8 +69,8 @@ export function BlogHubClient() {
 
   return (
     <div className="space-y-12">
-      {/* Daily Publishing Cadence Bar */}
-      <div className="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      {/* Publishing and discovery links */}
+      {/* <div className="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <span className="flex h-3 w-3 relative">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
@@ -77,10 +78,10 @@ export function BlogHubClient() {
           </span>
           <div>
             <p className="text-xs font-mono font-bold text-emerald-400 tracking-wider uppercase">
-              DAILY PUBLISHING SYSTEM ACTIVE
+              NOTES FOR BUILDERS
             </p>
             <p className="text-xs text-slate-300">
-              1 New Article Published Every Single Day • Engineering, AI, WebAR & Startup Strategy
+              Engineering, AI, WebAR, product building & startup lessons
             </p>
           </div>
         </div>
@@ -91,7 +92,7 @@ export function BlogHubClient() {
             className="px-3.5 py-1.5 rounded-full bg-slate-800 hover:bg-slate-700 text-xs font-mono text-slate-300 hover:text-white transition flex items-center gap-1.5 cursor-pointer border border-slate-700"
           >
             <Terminal className="w-3.5 h-3.5 text-blue-400" />
-            {showWorkflowGuide ? "Hide Writer Guide" : "Daily Writer Guide"}
+            {showWorkflowGuide ? "Hide Publishing Guide" : "Publishing Guide"}
           </button>
           <a
             href="/rss.xml"
@@ -102,23 +103,23 @@ export function BlogHubClient() {
             <Rss className="w-3.5 h-3.5 text-blue-400" /> RSS Feed
           </a>
         </div>
-      </div>
+      </div> */}
 
-      {/* Expandable Daily Publishing Workflow Guide for Abadurrahman */}
+      {/* Expandable publishing workflow guide */}
       {showWorkflowGuide && (
         <div className="p-6 rounded-2xl bg-slate-950 border border-blue-500/30 font-mono text-xs space-y-3 animate-in fade-in duration-200">
           <div className="flex items-center justify-between text-blue-400 font-bold border-b border-slate-800 pb-2">
-            <span>⚡ ABADURRAHMAN'S DAILY PUBLISHING WORKFLOW (2-MINUTE SETUP)</span>
-            <span className="text-[10px] text-slate-500">MDX & TypeScript Ready</span>
+            <span>ARTICLE PUBLISHING CHECKLIST</span>
+            <span className="text-[10px] text-slate-500">TypeScript content source</span>
           </div>
           <p className="text-slate-300 font-sans">
-            To publish a new article every day, simply add an entry to <code className="text-cyan-300 bg-slate-900 px-1 py-0.5 rounded">src/data/blog.ts</code>. The platform automatically handles:
+            Add a post to <code className="text-cyan-300 bg-slate-900 px-1 py-0.5 rounded">src/data/blog.ts</code> with a unique slug, summary, image URL or public path, and descriptive <code className="text-cyan-300 bg-slate-900 px-1 py-0.5 rounded">coverImageAlt</code>. Set <code className="text-cyan-300 bg-slate-900 px-1 py-0.5 rounded">draft: false</code>, verify claims, add primary-source links in <code className="text-cyan-300 bg-slate-900 px-1 py-0.5 rounded">references</code>, then deploy.
           </p>
           <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 text-slate-400 font-sans">
-            <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Clean SEO URL generation</li>
-            <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Table of Contents sidebar</li>
-            <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> JSON-LD Schema markup</li>
-            <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Dynamic XML Sitemap & RSS</li>
+            <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Unique title, slug & description</li>
+            <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Helpful headings and first-hand detail</li>
+            <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Article schema, canonical & dates</li>
+            <li className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Sitemap, RSS & llms.txt update</li>
           </ul>
         </div>
       )}
@@ -131,7 +132,7 @@ export function BlogHubClient() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-8 space-y-4">
+            <div className="lg:col-span-7 space-y-4">
               <div className="flex items-center gap-3 text-xs font-mono text-slate-400">
                 <span className="font-bold text-blue-400 px-2.5 py-0.5 rounded bg-blue-500/10 border border-blue-500/20">
                   {featuredPost.category}
@@ -157,6 +158,21 @@ export function BlogHubClient() {
                 </Link>
               </div>
             </div>
+
+            <Link
+              href={`/blog/${featuredPost.slug}`}
+              className="relative min-h-[220px] lg:min-h-[320px] lg:col-span-5 overflow-hidden rounded-2xl border border-slate-700"
+              aria-label={`Read ${featuredPost.title}`}
+            >
+              <Image
+                src={featuredPost.coverImage}
+                alt={featuredPost.coverImageAlt}
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                className="object-cover transition duration-500 hover:scale-105"
+              />
+            </Link>
           </div>
         </div>
       )}
@@ -173,7 +189,7 @@ export function BlogHubClient() {
                 : "bg-slate-900 border border-slate-800 text-slate-400 hover:text-white"
             }`}
           >
-            All Publications ({blogPosts.length})
+            All Publications ({publishedBlogPosts.length})
           </button>
 
           <button
@@ -195,7 +211,7 @@ export function BlogHubClient() {
                 : "bg-slate-900 border border-slate-800 text-slate-400 hover:text-white"
             }`}
           >
-            Daily Insights
+            Quick Reads
           </button>
         </div>
 
@@ -255,28 +271,39 @@ export function BlogHubClient() {
               <Link
                 key={post.id}
                 href={`/blog/${post.slug}`}
-                className="glass-card p-6 rounded-3xl border border-slate-800 flex flex-col justify-between space-y-6 hover:border-blue-500/40 transition group"
+                className="glass-card overflow-hidden rounded-3xl border border-slate-800 flex flex-col justify-between hover:border-blue-500/40 transition group"
               >
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between text-xs text-slate-400">
-                    <span className="font-semibold text-blue-400 px-2 py-0.5 rounded bg-blue-500/10">
-                      {post.category}
-                    </span>
-                    <span>{formatDate(post.publishedAt)}</span>
+                <div className="relative aspect-[16/9] overflow-hidden">
+                  <Image
+                    src={post.coverImage}
+                    alt={post.coverImageAlt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover transition duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col justify-between space-y-6 p-6">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between text-xs text-slate-400">
+                      <span className="font-semibold text-blue-400 px-2 py-0.5 rounded bg-blue-500/10">
+                        {post.category}
+                      </span>
+                      <span>{formatDate(post.publishedAt)}</span>
+                    </div>
+
+                    <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition leading-snug">
+                      {post.title}
+                    </h3>
+
+                    <p className="text-xs text-slate-300 line-clamp-3 leading-relaxed">{post.description}</p>
                   </div>
 
-                  <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition leading-snug">
-                    {post.title}
-                  </h3>
-
-                  <p className="text-xs text-slate-300 line-clamp-3 leading-relaxed">{post.description}</p>
-                </div>
-
-                <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
-                  <span className="font-mono text-[11px] text-slate-500">{post.readingTime}</span>
-                  <span className="text-blue-400 font-semibold group-hover:translate-x-1 transition flex items-center gap-1">
-                    Read Article →
-                  </span>
+                  <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+                    <span className="font-mono text-[11px] text-slate-500">{post.readingTime}</span>
+                    <span className="text-blue-400 font-semibold group-hover:translate-x-1 transition flex items-center gap-1">
+                      Read Article →
+                    </span>
+                  </div>
                 </div>
               </Link>
             ))}
@@ -287,8 +314,17 @@ export function BlogHubClient() {
               <Link
                 key={post.id}
                 href={`/blog/${post.slug}`}
-                className="block p-5 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-blue-500/40 transition group"
+                className="flex flex-col sm:flex-row gap-4 p-4 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-blue-500/40 transition group"
               >
+                <div className="relative aspect-[16/9] sm:aspect-[4/3] sm:w-36 shrink-0 overflow-hidden rounded-xl">
+                  <Image
+                    src={post.coverImage}
+                    alt={post.coverImageAlt}
+                    fill
+                    sizes="(max-width: 640px) 100vw, 144px"
+                    className="object-cover"
+                  />
+                </div>
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div className="space-y-1">
                     <div className="flex items-center gap-3 text-xs font-mono">
@@ -310,19 +346,19 @@ export function BlogHubClient() {
         )}
       </div>
 
-      {/* Fully Functional Daily Newsletter Sign-Up */}
+      {/* Newsletter sign-up */}
       <div className="glass-card p-8 sm:p-12 rounded-3xl border border-slate-800 bg-slate-950/90 text-center space-y-4 max-w-3xl mx-auto">
-        <h2 className="text-2xl font-bold text-white">RECEIVE DAILY ARTICLES IN YOUR INBOX</h2>
+        <h2 className="text-2xl font-bold text-white">RECEIVE NEW ARTICLES IN YOUR INBOX</h2>
         <p className="text-xs text-slate-300 max-w-lg mx-auto">
-          Get Abadurrahman's daily tech insights, WebAR code breakdowns, AI agent experiments, and startup founder lessons delivered every morning.
+          Get new articles on WebAR, AI, software engineering, and building a startup.
         </p>
 
         {newsletterSubmitted ? (
           <div className="p-6 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center space-y-2 max-w-md mx-auto animate-in fade-in duration-300">
             <CheckCircle2 className="w-10 h-10 text-emerald-400 mx-auto" />
-            <p className="text-sm font-bold text-white">You're Subscribed!</p>
+            <p className="text-sm font-bold text-white">You&apos;re Subscribed!</p>
             <p className="text-xs text-slate-300">
-              Thank you for subscribing. You will now receive every daily article directly in your inbox.
+              Thank you for subscribing. You&apos;ll receive an email when new articles are available.
             </p>
             <button
               onClick={() => setNewsletterSubmitted(false)}
@@ -359,7 +395,7 @@ export function BlogHubClient() {
                     <Loader2 className="w-3.5 h-3.5 animate-spin" /> Subscribing...
                   </>
                 ) : (
-                  "Subscribe Daily"
+                  "Subscribe"
                 )}
               </button>
             </div>

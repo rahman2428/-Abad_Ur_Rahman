@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Search, X, BookOpen, Tag, ArrowRight } from "lucide-react";
-import { blogPosts, blogCategories } from "@/data/blog";
+import { blogCategories, publishedBlogPosts } from "@/data/blog";
 import { projectsData } from "@/data/projects";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -37,7 +37,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
   if (!isOpen) return null;
 
-  const filteredPosts = blogPosts.filter(
+  const filteredPosts = publishedBlogPosts.filter(
     (post) =>
       post.title.toLowerCase().includes(query.toLowerCase()) ||
       post.description.toLowerCase().includes(query.toLowerCase()) ||

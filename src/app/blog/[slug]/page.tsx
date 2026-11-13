@@ -1,8 +1,13 @@
 import React from "react";
-import { blogPosts } from "@/data/blog";
+import {
+  blogCategorySlug,
+  blogTermSlug,
+  publishedBlogPosts,
+} from "@/data/blog";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Calendar, Clock, BookOpen, Tag, Share2, Globe, ChevronRight } from "lucide-react";
+import Image from "next/image";
+import { Calendar, Clock, BookOpen, Globe, ChevronRight } from "lucide-react";
 import { IconGithub, IconLinkedin } from "@/components/ui/icons";
 import { formatDate } from "@/lib/utils";
 import type { Metadata } from "next";
@@ -15,24 +20,24 @@ interface BlogPostPageProps {
 }
 
 export async function generateStaticParams() {
-  return blogPosts.map((post) => ({
+  return publishedBlogPosts.map((post) => ({
     slug: post.slug,
   }));
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const resolvedParams = await params;
-  const post = blogPosts.find((p) => p.slug === resolvedParams.slug);
+  const post = publishedBlogPosts.find((p) => p.slug === resolvedParams.slug);
 
   if (!post) return {};
 
   const articleUrl = absoluteUrl(`/blog/${post.slug}`);
 
   return {
-    title: `${post.title} — Abadurrahman Knowledge Platform`,
+    title: post.title,
     description: post.description,
     keywords: post.keywords,
-    authors: [{ name: post.author.name, url: `${SITE_URL}/` }],
+    authors: [{ name: post.author.name, url: `${SITE_URL}/#person` }],
     creator: post.author.name,
     publisher: SITE_NAME,
     alternates: {
@@ -48,7 +53,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
           url: post.coverImage,
           width: 1200,
           height: 630,
-          alt: post.title,
+          alt: post.coverImageAlt,
         },
       ],
       locale: "en_IN",
@@ -81,19 +86,25 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const resolvedParams = await params;
-  const post = blogPosts.find((p) => p.slug === resolvedParams.slug);
+  const post = publishedBlogPosts.find((p) => p.slug === resolvedParams.slug);
 
   if (!post) {
     notFound();
   }
 
-  const currentIndex = blogPosts.findIndex((p) => p.slug === post.slug);
-  const prevPost = currentIndex > 0 ? blogPosts[currentIndex - 1] : null;
-  const nextPost = currentIndex < blogPosts.length - 1 ? blogPosts[currentIndex + 1] : null;
+  const currentIndex = publishedBlogPosts.findIndex((p) => p.slug === post.slug);
+  const prevPost = currentIndex > 0 ? publishedBlogPosts[currentIndex - 1] : null;
+  const nextPost =
+    currentIndex < publishedBlogPosts.length - 1
+      ? publishedBlogPosts[currentIndex + 1]
+      : null;
 
-  const relatedArticles = blogPosts.filter((p) => p.slug !== post.slug).slice(0, 3);
+  const relatedArticles = publishedBlogPosts
+    .filter((relatedPost) => post.relatedSlugs.includes(relatedPost.slug))
+    .slice(0, 3);
   const articleUrl = absoluteUrl(`/blog/${post.slug}`);
-  const categorySlug = post.category.toLowerCase().replace(/[^a-z0-9]/g, "-");
+  const categorySlug = blogCategorySlug(post.category);
+  const readingMinutes = Number.parseInt(post.readingTime, 10);
 
   const jsonLdGraph = {
     "@context": "https://schema.org",
@@ -107,15 +118,30 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         datePublished: post.publishedAt,
         dateModified: post.updatedAt || post.publishedAt,
         inLanguage: "en-IN",
+        timeRequired: Number.isFinite(readingMinutes)
+          ? `PT${readingMinutes}M`
+          : undefined,
         mainEntityOfPage: {
           "@type": "WebPage",
           "@id": articleUrl,
         },
         author: { "@id": `${SITE_URL}/#person` },
         publisher: { "@id": `${SITE_URL}/#person` },
-        keywords: post.keywords.join(", "),
+        isPartOf: {
+          "@type": "Blog",
+          "@id": `${SITE_URL}/blog#blog`,
+          name: `${SITE_NAME} Blog`,
+          url: absoluteUrl("/blog"),
+        },
+        keywords: [...post.keywords, ...post.tags].join(", "),
         articleSection: post.category,
+        citation: post.references?.map((reference) => reference.url),
         url: articleUrl,
+        hasPart: post.toc.map((heading) => ({
+          "@type": "WebPageElement",
+          name: heading.text,
+          url: `${articleUrl}#${heading.id}`,
+        })),
       },
       {
         "@type": "BreadcrumbList",
@@ -137,7 +163,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             "@type": "ListItem",
             position: 3,
             name: post.category,
-            item: `${SITE_URL}/blog/category/${categorySlug}`,
+            item: absoluteUrl(`/blog/category/${categorySlug}`),
           },
           {
             "@type": "ListItem",
@@ -154,7 +180,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdGraph) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLdGraph).replace(/</g, "\\u003c"),
+        }}
       />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
@@ -164,7 +192,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <ChevronRight className="w-3 h-3 text-slate-600" />
           <Link href="/blog" className="hover:text-white transition">Knowledge Platform</Link>
           <ChevronRight className="w-3 h-3 text-slate-600" />
-          <Link href={`/blog/category/${post.category.toLowerCase().replace(/[^a-z0-9]/g, "-")}`} className="text-blue-400 hover:underline">
+          <Link href={`/blog/category/${categorySlug}`} className="text-blue-400 hover:underline">
             {post.category}
           </Link>
           <ChevronRight className="w-3 h-3 text-slate-600" />
@@ -177,11 +205,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <span className="font-bold px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/30">
               {post.category}
             </span>
-            <span className="flex items-center gap-1 text-slate-400">
+            <time dateTime={post.publishedAt} className="flex items-center gap-1 text-slate-400">
               <Calendar className="w-3.5 h-3.5" /> Published {formatDate(post.publishedAt)}
-            </span>
+            </time>
             {post.updatedAt && (
-              <span className="text-slate-500">(Updated {formatDate(post.updatedAt)})</span>
+              <time dateTime={post.updatedAt} className="text-slate-500">
+                (Updated {formatDate(post.updatedAt)})
+              </time>
             )}
             <span className="flex items-center gap-1 text-slate-400 ml-auto">
               <Clock className="w-3.5 h-3.5" /> {post.readingTime}
@@ -203,6 +233,18 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </div>
           </div>
         </div>
+
+        <figure className="space-y-3">
+          <Image
+            src={post.coverImage}
+            alt={post.coverImageAlt}
+            width={1200}
+            height={630}
+            priority
+            sizes="(max-width: 1024px) 100vw, 1024px"
+            className="w-full rounded-3xl border border-slate-800 object-cover"
+          />
+        </figure>
 
         {/* Main Content Layout with TOC Sidebar */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start pt-6 border-t border-slate-800">
@@ -231,13 +273,35 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               dangerouslySetInnerHTML={{ __html: post.contentHtml }}
             />
 
+            {post.references && post.references.length > 0 && (
+              <section aria-labelledby="article-references" className="pt-6 border-t border-slate-800">
+                <h2 id="article-references" className="text-lg font-bold text-white">
+                  Sources &amp; further reading
+                </h2>
+                <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm">
+                  {post.references.map((reference) => (
+                    <li key={reference.url}>
+                      <a
+                        href={reference.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-300 underline decoration-slate-600 underline-offset-4 hover:text-blue-200"
+                      >
+                        {reference.title}
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              </section>
+            )}
+
             {/* Article Tags & Keywords */}
             <div className="pt-6 border-t border-slate-800 flex flex-wrap gap-2 items-center">
               <span className="text-xs font-mono text-slate-400 font-semibold">TAGS:</span>
               {post.tags.map((tag) => (
                 <Link
                   key={tag}
-                  href={`/blog/tag/${tag.toLowerCase().replace(/[^a-z0-9]/g, "-")}`}
+                  href={`/blog/tag/${blogTermSlug(tag)}`}
                   className="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300 hover:text-blue-400 transition"
                 >
                   #{tag}

@@ -1,7 +1,12 @@
 import React from "react";
-import { blogPosts, blogCategories } from "@/data/blog";
+import {
+  blogCategories,
+  blogCategorySlug,
+  publishedBlogPosts,
+} from "@/data/blog";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, ArrowRight, BookOpen } from "lucide-react";
 import { formatDate } from "@/lib/utils";
 import type { Metadata } from "next";
@@ -14,7 +19,13 @@ interface CategoryPageProps {
 }
 
 export async function generateStaticParams() {
-  return blogCategories.map((c) => ({
+  const activeCategories = blogCategories.filter((category) =>
+    publishedBlogPosts.some(
+      (post) => blogCategorySlug(post.category) === category.slug
+    )
+  );
+
+  return activeCategories.map((c) => ({
     slug: c.slug,
   }));
 }
@@ -25,9 +36,14 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
 
   if (!categoryObj) return {};
 
+  const hasPublishedArticles = publishedBlogPosts.some(
+    (post) => blogCategorySlug(post.category) === categoryObj.slug
+  );
+  if (!hasPublishedArticles) return {};
+
   return pageMetadata(
     `/blog/category/${categoryObj.slug}`,
-    `${categoryObj.name} Articles — Abadurrahman`,
+    `${categoryObj.name} articles`,
     categoryObj.description
   );
 }
@@ -40,10 +56,11 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     notFound();
   }
 
-  const posts = blogPosts.filter(
-    (p) => p.category.toLowerCase().replace(/[^a-z0-9]/g, "-") === categoryObj.slug ||
-      p.category.toLowerCase() === categoryObj.name.toLowerCase()
+  const posts = publishedBlogPosts.filter(
+    (post) => blogCategorySlug(post.category) === categoryObj.slug
   );
+
+  if (posts.length === 0) notFound();
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
@@ -77,9 +94,18 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
               <Link
                 key={post.id}
                 href={`/blog/${post.slug}`}
-                className="glass-card p-6 rounded-3xl border border-slate-800 flex flex-col justify-between space-y-6 hover:border-blue-500/40 transition group"
+                className="glass-card overflow-hidden rounded-3xl border border-slate-800 flex flex-col justify-between hover:border-blue-500/40 transition group"
               >
-                <div className="space-y-3">
+                <div className="relative aspect-[16/9] overflow-hidden">
+                  <Image
+                    src={post.coverImage}
+                    alt={post.coverImageAlt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover transition duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="flex-1 space-y-3 p-6">
                   <div className="flex items-center justify-between text-xs text-slate-400">
                     <span className="font-semibold text-blue-400 px-2 py-0.5 rounded bg-blue-500/10">
                       {post.category}
@@ -94,7 +120,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                   <p className="text-xs text-slate-300 line-clamp-3 leading-relaxed">{post.description}</p>
                 </div>
 
-                <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+                <div className="mx-6 mt-4 mb-6 border-t border-slate-800/80 pt-4 flex items-center justify-between text-xs text-slate-400">
                   <span>By {post.author.name}</span>
                   <span className="text-blue-400 font-semibold group-hover:translate-x-1 transition flex items-center gap-1">
                     Read <ArrowRight className="w-3.5 h-3.5" />

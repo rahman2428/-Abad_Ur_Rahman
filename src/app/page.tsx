@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowRight,
   Sparkles,
@@ -27,7 +28,7 @@ import { techvimanData } from "@/data/techviman";
 import { projectsData } from "@/data/projects";
 import { skillsData } from "@/data/skills";
 import { labExperiments } from "@/data/lab";
-import { blogPosts } from "@/data/blog";
+import { publishedBlogPosts } from "@/data/blog";
 import { socialLinks } from "@/data/social";
 import { HeroVisual } from "@/components/hero/hero-visual";
 import confetti from "canvas-confetti";
@@ -542,12 +543,21 @@ export default function HomePage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {blogPosts.map((post) => (
+          {publishedBlogPosts.slice(0, 3).map((post) => (
             <Link
               key={post.id}
               href={`/blog/${post.slug}`}
               className="glass-card p-6 rounded-2xl border border-slate-800 flex flex-col justify-between space-y-4 hover:border-blue-500/40 transition group"
             >
+              <div className="relative aspect-[16/9] overflow-hidden rounded-xl border border-slate-800">
+                <Image
+                  src={post.coverImage}
+                  alt={post.coverImageAlt}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover transition duration-500 group-hover:scale-105"
+                />
+              </div>
               <div className="space-y-3">
                 <div className="flex items-center justify-between text-xs text-slate-400">
                   <span className="font-semibold text-blue-400 px-2 py-0.5 rounded bg-blue-500/10">{post.category}</span>

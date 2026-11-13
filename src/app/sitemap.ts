@@ -1,9 +1,21 @@
 import { MetadataRoute } from "next";
-import { blogPosts, blogCategories } from "@/data/blog";
+import {
+  blogCategories,
+  blogCategorySlug,
+  publishedBlogPosts,
+} from "@/data/blog";
 import { projectsData } from "@/data/projects";
 import { SITE_URL } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const latestBlogUpdate = publishedBlogPosts.reduce(
+    (latest, post) => {
+      const postDate = new Date(post.updatedAt || post.publishedAt);
+      return postDate > latest ? postDate : latest;
+    },
+    new Date(0)
+  );
+
   const staticRoutes = [
     "",
     "/about",
@@ -18,39 +30,40 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/blog",
   ].map((route) => ({
     url: `${SITE_URL}${route || "/"}`,
-    lastModified: new Date(),
+    lastModified: route === "/blog" ? latestBlogUpdate : new Date(),
     changeFrequency: route === "/blog" ? ("daily" as const) : ("weekly" as const),
     priority: route === "" ? 1.0 : route === "/blog" || route === "/techviman" ? 0.95 : 0.8,
   }));
 
-  const blogRoutes = blogPosts.map((post) => ({
+  const blogRoutes = publishedBlogPosts.map((post) => ({
     url: `${SITE_URL}/blog/${post.slug}`,
     lastModified: new Date(post.updatedAt || post.publishedAt),
-    changeFrequency: "daily" as const,
-    priority: post.featured ? 1.0 : 0.9,
-  }));
-
-  const categoryRoutes = blogCategories.map((cat) => ({
-    url: `${SITE_URL}/blog/category/${cat.slug}`,
-    lastModified: new Date(),
     changeFrequency: "weekly" as const,
-    priority: 0.85,
+    priority: post.featured ? 0.9 : 0.8,
   }));
 
-  const tagSlugs = Array.from(
-    new Set(
-      blogPosts.flatMap((post) =>
-        post.tags.map((tag) => tag.toLowerCase().replace(/[^a-z0-9]/g, "-"))
-      )
-    )
-  );
+  const categoryRoutes = blogCategories
+    .map((category) => {
+      const categoryPosts = publishedBlogPosts.filter(
+        (post) => blogCategorySlug(post.category) === category.slug
+      );
+      if (categoryPosts.length === 0) return null;
 
-  const tagRoutes = tagSlugs.map((slug) => ({
-    url: `${SITE_URL}/blog/tag/${slug}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.7,
-  }));
+      const lastModified = categoryPosts.reduce((latest, post) => {
+        const postDate = new Date(post.updatedAt || post.publishedAt);
+        return postDate > latest ? postDate : latest;
+      }, new Date(0));
+
+      return {
+        url: `${SITE_URL}/blog/category/${category.slug}`,
+        lastModified,
+        changeFrequency: "weekly" as const,
+        priority: 0.7,
+      };
+    })
+    .filter(
+      (route): route is NonNullable<typeof route> => route !== null
+    );
 
   const projectRoutes = projectsData.map((project) => ({
     url: `${SITE_URL}/projects/${project.slug}`,
@@ -59,5 +72,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.85,
   }));
 
-  return [...staticRoutes, ...blogRoutes, ...categoryRoutes, ...tagRoutes, ...projectRoutes];
+  return [...staticRoutes, ...blogRoutes, ...categoryRoutes, ...projectRoutes];
 }

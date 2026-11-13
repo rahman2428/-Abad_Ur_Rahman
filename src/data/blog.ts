@@ -4,6 +4,11 @@ export interface BlogHeading {
   level: 2 | 3;
 }
 
+export interface BlogReference {
+  title: string;
+  url: string;
+}
+
 export interface BlogPost {
   id: string;
   slug: string;
@@ -34,6 +39,7 @@ export interface BlogPost {
   tags: string[];
   keywords: string[];
   coverImage: string;
+  coverImageAlt: string;
   readingTime: string;
   featured: boolean;
   pillar: boolean;
@@ -42,6 +48,7 @@ export interface BlogPost {
   toc: BlogHeading[];
   contentHtml: string;
   relatedSlugs: string[];
+  references?: BlogReference[];
 }
 
 export const blogCategories = [
@@ -53,6 +60,24 @@ export const blogCategories = [
   { slug: "ar-3d", name: "AR & 3D Web", description: "WebXR, Three.js, WebAR, 3D modeling, and spatial computing." },
   { slug: "technology", name: "Emerging Technology", description: "Cloud computing, developer tooling, automation, and tech trends." },
 ];
+
+export function blogTermSlug(value: string): string {
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+export function blogCategorySlug(category: string): string {
+  if (category === "AR / 3D") return "ar-3d";
+
+  const matchingCategory = blogCategories.find(
+    (item) => item.slug === blogTermSlug(category)
+  );
+  return matchingCategory?.slug ?? blogTermSlug(category);
+}
 
 export const blogPosts: BlogPost[] = [
   {
@@ -73,7 +98,8 @@ export const blogPosts: BlogPost[] = [
     category: "AI",
     tags: ["AI Agents", "Artificial Intelligence", "Automation", "Multi-Agent", "TECHVIMAN", "SaaS", "Future Tech"],
     keywords: ["AI agents evolution", "what are AI agents", "AI chatbots vs AI agents", "multi agent systems", "Abadurrahman AI agent guide"],
-    coverImage: "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=1200&q=80",
+    coverImage: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80",
+    coverImageAlt: "Cover image for the article about AI agents and automation",
     readingTime: "9 min read",
     featured: true,
     pillar: true,
@@ -94,6 +120,16 @@ export const blogPosts: BlogPost[] = [
       { id: "final-thoughts", text: "Final Thoughts", level: 2 },
     ],
     relatedSlugs: ["building-ai-powered-web-apps-with-nextjs-and-fastapi", "how-i-built-an-immersive-webar-restaurant-menu"],
+    references: [
+      {
+        title: "Anthropic: Building effective agents",
+        url: "https://www.anthropic.com/engineering/building-effective-agents",
+      },
+      {
+        title: "OpenAI Agents SDK documentation",
+        url: "https://openai.github.io/openai-agents-python/",
+      },
+    ],
     contentHtml: `
       <p class="lead">Artificial Intelligence is moving beyond simple chatbots and question-answering systems. The next major evolution is <strong>AI Agents</strong>—intelligent systems that can understand goals, make decisions, use tools, execute tasks, learn from feedback, and work toward an outcome with limited human intervention.</p>
       
@@ -245,6 +281,7 @@ Emerging Model:    Human → AI Agent → Tools → Actions → Result</code></p
     tags: ["WebXR", "JavaScript", "3D", "AR", "GLB", "USDZ", "TECHVIMAN"],
     keywords: ["WebAR restaurant menu", "WebXR 3D food viewer", "Three.js AR menu", "TECHVIMAN AR Menu"],
     coverImage: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80",
+    coverImageAlt: "Cover image for the WebAR restaurant menu case study",
     readingTime: "6 min read",
     featured: false,
     pillar: true,
@@ -258,14 +295,24 @@ Emerging Model:    Human → AI Agent → Tools → Actions → Result</code></p
       { id: "key-takeaways-for-developers", text: "Key Takeaways for Developers & Founders", level: 2 },
     ],
     relatedSlugs: ["ai-agents-the-next-evolution-of-artificial-intelligence", "building-ai-powered-web-apps-with-nextjs-and-fastapi"],
+    references: [
+      {
+        title: "MDN: WebXR Device API",
+        url: "https://developer.mozilla.org/en-US/docs/Web/API/WebXR_Device_API",
+      },
+      {
+        title: "Google: model-viewer documentation",
+        url: "https://modelviewer.dev/",
+      },
+    ],
     contentHtml: `
       <p class="lead">In physical restaurants, diners frequently hesitate when ordering unfamiliar dishes. Photographs on paper menus are often static or non-existent, leaving guests guessing about portion sizes, presentation, and ingredients.</p>
       
       <h2 id="the-friction-in-traditional-dining">The Friction in Traditional Dining</h2>
-      <p>When studying user behavior in physical dining environments, we observed two critical patterns:</p>
+      <p>We started with two product assumptions to validate with restaurant teams and diners:</p>
       <ul>
-        <li>Over 75% of customers take extra minutes asking servers about dish appearance or portion size.</li>
-        <li>Over 80% of guests refuse to download a native iOS/Android app just to view a restaurant menu.</li>
+        <li>Diners benefit from seeing a dish's appearance and portion before ordering.</li>
+        <li>A menu that opens from a QR code should not require an app download.</li>
       </ul>
       <p>This led to the creation of <strong>AR Menu</strong> under the TECHVIMAN product banner — a 100% web-native solution that runs directly inside Chrome, Safari, or mobile web browsers.</p>
 
@@ -311,7 +358,8 @@ const modelSrc = isIOS ? '/assets/models/dish.usdz' : '/assets/models/dish.glb';
     category: "AI",
     tags: ["AI", "Next.js", "FastAPI", "Python", "TypeScript", "REST API", "Machine Learning"],
     keywords: ["Nextjs FastAPI AI app", "Python ML web integration", "Full-stack AI web development", "Abadurrahman AI guide"],
-    coverImage: "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=1200&q=80",
+    coverImage: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=1200&q=80",
+    coverImageAlt: "Cover image for the Next.js and FastAPI AI application guide",
     readingTime: "8 min read",
     featured: false,
     pillar: true,
@@ -331,7 +379,7 @@ const modelSrc = isIOS ? '/assets/models/dish.usdz' : '/assets/models/dish.glb';
       <h2 id="the-modern-ai-stack">The Modern AI Stack: Next.js + FastAPI</h2>
       <p>Connecting Python's rich AI ecosystem (PyTorch, OpenCV, Transformers) with modern JavaScript frontends requires clean separation of concerns:</p>
       <ul>
-        <li><strong>Frontend:</strong> Next.js 15 with App Router, TypeScript, and Tailwind CSS for rapid rendering and SEO.</li>
+        <li><strong>Frontend:</strong> Next.js App Router, TypeScript, and Tailwind CSS for rendering and SEO.</li>
         <li><strong>Backend:</strong> FastAPI (Python 3.11+) providing async REST endpoints, automatic Swagger docs, and high-speed data processing.</li>
       </ul>
 
@@ -374,6 +422,7 @@ class ProcessingRequest(BaseModel):
     tags: ["Startup", "Entrepreneurship", "TECHVIMAN", "CS Student", "Product Thinking", "Building in Public"],
     keywords: ["CS student startup lessons", "TECHVIMAN founder story", "Abadurrahman startup journey", "Developer to entrepreneur"],
     coverImage: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80",
+    coverImageAlt: "Cover image for lessons from building a technology startup",
     readingTime: "5 min read",
     featured: false,
     pillar: false,
@@ -387,6 +436,16 @@ class ProcessingRequest(BaseModel):
       { id: "the-techviman-roadmap", text: "5. What's Next for TECHVIMAN", level: 2 },
     ],
     relatedSlugs: ["ai-agents-the-next-evolution-of-artificial-intelligence", "how-i-built-an-immersive-webar-restaurant-menu"],
+    references: [
+      {
+        title: "Next.js: Metadata and Open Graph images",
+        url: "https://nextjs.org/docs/app/getting-started/metadata-and-og-images",
+      },
+      {
+        title: "FastAPI: Concurrency and async/await",
+        url: "https://fastapi.tiangolo.com/async/",
+      },
+    ],
     contentHtml: `
       <p class="lead">Many Computer Science students spend years mastering syntax and data structures without ever deploying a single software application for actual human users. Here is what I learned founding <strong>TECHVIMAN</strong>.</p>
 
@@ -407,3 +466,10 @@ class ProcessingRequest(BaseModel):
     `,
   },
 ];
+
+export const publishedBlogPosts = blogPosts
+  .filter((post) => !post.draft)
+  .sort(
+    (a, b) =>
+      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+  );

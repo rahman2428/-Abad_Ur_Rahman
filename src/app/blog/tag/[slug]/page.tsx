@@ -1,7 +1,8 @@
 import React from "react";
-import { blogPosts } from "@/data/blog";
+import { blogTermSlug, publishedBlogPosts } from "@/data/blog";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/site";
@@ -14,22 +15,44 @@ interface TagPageProps {
 
 export async function generateMetadata({ params }: TagPageProps): Promise<Metadata> {
   const resolvedParams = await params;
-  const tag = resolvedParams.slug;
+  const tag = publishedBlogPosts
+    .flatMap((post) => post.tags)
+    .find((postTag) => blogTermSlug(postTag) === resolvedParams.slug);
 
-  return pageMetadata(
-    `/blog/tag/${tag}`,
-    `#${tag} — Abadurrahman Knowledge Platform`,
-    `Articles tagged with #${tag} across Abadurrahman's personal knowledge platform.`
+  if (!tag) return { robots: { index: false, follow: true } };
+
+  return {
+    ...pageMetadata(
+      `/blog/tag/${resolvedParams.slug}`,
+      `Articles tagged ${tag}`,
+      `Browse ${tag} articles by Abadurrahman, with practical explanations and related topics.`
+    ),
+    robots: { index: false, follow: true },
+  };
+}
+
+export async function generateStaticParams() {
+  const tagSlugs = new Set(
+    publishedBlogPosts.flatMap((post) =>
+      post.tags.map((tag) => blogTermSlug(tag))
+    )
   );
+
+  return Array.from(tagSlugs, (slug) => ({ slug }));
 }
 
 export default async function TagPage({ params }: TagPageProps) {
   const resolvedParams = await params;
-  const tagQuery = resolvedParams.slug.toLowerCase();
+  const tagQuery = resolvedParams.slug;
+  const tagLabel = publishedBlogPosts
+    .flatMap((post) => post.tags)
+    .find((tag) => blogTermSlug(tag) === tagQuery);
 
-  const posts = blogPosts.filter((p) =>
-    p.tags.some((t) => t.toLowerCase().replace(/[^a-z0-9]/g, "-") === tagQuery || t.toLowerCase() === tagQuery)
+  const posts = publishedBlogPosts.filter((post) =>
+    post.tags.some((tag) => blogTermSlug(tag) === tagQuery)
   );
+
+  if (!tagLabel || posts.length === 0) notFound();
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
@@ -46,9 +69,9 @@ export default async function TagPage({ params }: TagPageProps) {
         <span className="text-xs font-mono font-bold uppercase tracking-widest text-cyan-400 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30">
           TAG ARCHIVE
         </span>
-        <h1 className="text-4xl sm:text-5xl font-black text-white">#{resolvedParams.slug}</h1>
+        <h1 className="text-4xl sm:text-5xl font-black text-white">#{tagLabel}</h1>
         <p className="text-base text-slate-300 leading-relaxed font-medium">
-          Articles tagged with #{resolvedParams.slug} across Abadurrahman's Knowledge Platform.
+          Articles tagged with #{tagLabel} across Abadurrahman&apos;s Knowledge Platform.
         </p>
       </div>
 
@@ -65,9 +88,18 @@ export default async function TagPage({ params }: TagPageProps) {
               <Link
                 key={post.id}
                 href={`/blog/${post.slug}`}
-                className="glass-card p-6 rounded-3xl border border-slate-800 flex flex-col justify-between space-y-6 hover:border-blue-500/40 transition group"
+                className="glass-card overflow-hidden rounded-3xl border border-slate-800 flex flex-col justify-between hover:border-blue-500/40 transition group"
               >
-                <div className="space-y-3">
+                <div className="relative aspect-[16/9] overflow-hidden">
+                  <Image
+                    src={post.coverImage}
+                    alt={post.coverImageAlt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover transition duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="flex-1 space-y-3 p-6">
                   <div className="flex items-center justify-between text-xs text-slate-400">
                     <span className="font-semibold text-blue-400 px-2 py-0.5 rounded bg-blue-500/10">
                       {post.category}
@@ -82,7 +114,7 @@ export default async function TagPage({ params }: TagPageProps) {
                   <p className="text-xs text-slate-300 line-clamp-3 leading-relaxed">{post.description}</p>
                 </div>
 
-                <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+                <div className="mx-6 mt-4 mb-6 border-t border-slate-800/80 pt-4 flex items-center justify-between text-xs text-slate-400">
                   <span>By {post.author.name}</span>
                   <span className="text-blue-400 font-semibold group-hover:translate-x-1 transition flex items-center gap-1">
                     Read <ArrowRight className="w-3.5 h-3.5" />
