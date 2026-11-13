@@ -90,7 +90,7 @@ export const blogPosts: BlogPost[] = [
     author: {
       name: "Abadurrahman",
       role: "Developer & Startup Founder",
-      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
+      avatar: "/my_photo/abadurrahman.jpg",
       bio: "Computer Science Engineering student, founder of TECHVIMAN, building AI tools, web apps, and WebAR products.",
     },
     publishedAt: "2026-08-17",
@@ -272,7 +272,7 @@ Emerging Model:    Human → AI Agent → Tools → Actions → Result</code></p
     author: {
       name: "Abadurrahman",
       role: "Developer & Startup Founder",
-      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
+      avatar: "/my_photo/abadurrahman.jpg",
       bio: "Computer Science Engineering student, founder of TECHVIMAN, building AI tools, web apps, and WebAR products.",
     },
     publishedAt: "2026-08-15",
@@ -350,7 +350,7 @@ const modelSrc = isIOS ? '/assets/models/dish.usdz' : '/assets/models/dish.glb';
     author: {
       name: "Abadurrahman",
       role: "Developer & Startup Founder",
-      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
+      avatar: "/my_photo/abadurrahman.jpg",
       bio: "Computer Science Engineering student, founder of TECHVIMAN, building AI tools, web apps, and WebAR products.",
     },
     publishedAt: "2026-08-10",
@@ -413,7 +413,7 @@ class ProcessingRequest(BaseModel):
     author: {
       name: "Abadurrahman",
       role: "Developer & Startup Founder",
-      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
+      avatar: "/my_photo/abadurrahman.jpg",
       bio: "Computer Science Engineering student, founder of TECHVIMAN, building AI tools, web apps, and WebAR products.",
     },
     publishedAt: "2026-08-01",
@@ -475,7 +475,7 @@ class ProcessingRequest(BaseModel):
     author: {
       name: "Abadurrahman",
       role: "Developer & Startup Founder",
-      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
+      avatar: "/my_photo/abadurrahman.jpg",
       bio: "Computer Science Engineering student, founder of TECHVIMAN, building AI tools, web apps, and WebAR products.",
     },
     publishedAt: "2026-08-18",
