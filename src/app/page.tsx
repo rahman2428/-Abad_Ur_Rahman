@@ -92,71 +92,57 @@ export default function HomePage() {
       {/* ========================================================================= */}
       {/* 1. HERO SECTION */}
       {/* ========================================================================= */}
-      <section className="relative min-h-[90vh] flex flex-col justify-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <section className="relative min-h-[86vh] flex flex-col justify-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Left Hero Content */}
-          <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-mono font-semibold tracking-wider uppercase">
-              <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
-              COMPUTER SCIENCE ENGINEER • DEVELOPER • ENTREPRENEUR
+          <div className="lg:col-span-7 space-y-7">
+            <div className="inline-flex items-center gap-2.5 text-blue-300 text-xs font-semibold tracking-[0.16em] uppercase">
+              <span className="w-2 h-2 rounded-full bg-cyan-400" />
+              Computer science engineer · Developer · Founder
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.1]">
-              BUILDING <span className="glow-gradient-text">DIGITAL PRODUCTS</span>, EXPERIENCES & BUSINESSES.
+            <h1 className="text-5xl sm:text-6xl lg:text-[4.5rem] font-semibold text-slate-50 tracking-[-0.055em] leading-[1.02]">
+              I build <span className="glow-gradient-text">digital products</span>, experiences & businesses.
             </h1>
 
-            <p className="text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed">
-              This is the official personal portfolio of Abadurrahman, CEO of TECHVIMAN — a computer science engineering student, developer, and entrepreneur building web applications, AI-powered products, immersive WebAR experiences, and technology-driven businesses.
+            <p className="text-base sm:text-lg text-slate-300 max-w-xl leading-8">
+              I’m Abadurrahman, founder of TECHVIMAN. I bring thoughtful engineering and product thinking together to make useful software, AI tools, and immersive web experiences.
             </p>
 
-            {/* 4 Call to Actions */}
-            <div className="flex flex-wrap items-center gap-3 pt-2">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-4 pt-1">
               <Link
                 href="/projects"
-                className="px-6 py-3 rounded-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-semibold text-sm shadow-lg shadow-blue-500/25 transition flex items-center gap-2 group"
+                className="px-6 py-3.5 rounded-full bg-blue-500 hover:bg-blue-400 text-slate-950 font-semibold text-sm shadow-lg shadow-blue-500/15 transition flex items-center gap-2 group"
               >
-                Explore My Work <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
+                Explore my work <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
               </Link>
 
               <Link
                 href="/techviman"
-                className="px-6 py-3 rounded-full bg-slate-900 border border-cyan-500/40 text-cyan-400 hover:bg-cyan-500/10 hover:border-cyan-400 text-sm font-semibold transition flex items-center gap-2"
+                className="text-sm font-semibold text-slate-200 hover:text-cyan-300 transition flex items-center gap-2"
               >
-                <Sparkles className="w-4 h-4 text-cyan-400" /> Discover TECHVIMAN
-              </Link>
-
-              <Link
-                href="/blog"
-                className="px-5 py-3 rounded-full bg-slate-900/80 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 text-sm font-medium transition"
-              >
-                Read My Blog
-              </Link>
-
-              <Link
-                href="/resume"
-                className="px-5 py-3 rounded-full bg-slate-900/80 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 text-sm font-medium transition"
-              >
-                Download Resume
+                <Sparkles className="w-4 h-4 text-cyan-400" /> Meet TECHVIMAN
               </Link>
             </div>
 
             {/* Social Links */}
-            <div className="pt-4 flex items-center gap-4 border-t border-slate-800/80">
-              <span className="text-xs text-slate-400 font-mono">Connect:</span>
+            <div className="pt-5 flex items-center gap-4 border-t border-slate-800/80">
+              <span className="text-xs text-slate-400">Find me</span>
               <div className="flex items-center gap-3 text-slate-400">
-                <a href="https://github.com/rahman2428" target="_blank" rel="noopener noreferrer" aria-label="Abadurrahman on GitHub" className="hover:text-white transition p-2 rounded-lg bg-slate-900 border border-slate-800">
+                <a href="https://github.com/rahman2428" target="_blank" rel="noopener noreferrer" aria-label="Abadurrahman on GitHub" className="hover:text-blue-300 transition p-2 rounded-full bg-slate-900 border border-slate-800">
                   <IconGithub className="w-4 h-4" />
                 </a>
-                <a href="https://www.linkedin.com/in/abadur-rahman-056582312/" target="_blank" rel="noopener noreferrer" aria-label="Abadurrahman on LinkedIn" className="hover:text-white transition p-2 rounded-lg bg-slate-900 border border-slate-800">
+                <a href="https://www.linkedin.com/in/abadur-rahman-056582312/" target="_blank" rel="noopener noreferrer" aria-label="Abadurrahman on LinkedIn" className="hover:text-blue-300 transition p-2 rounded-full bg-slate-900 border border-slate-800">
                   <IconLinkedin className="w-4 h-4" />
                 </a>
-                <a href="https://techviman.com/" target="_blank" rel="noopener noreferrer" aria-label="TECHVIMAN official website founded by Abadurrahman" className="hover:text-white transition p-2 rounded-lg bg-slate-900 border border-slate-800">
+                <a href="https://techviman.com/" target="_blank" rel="noopener noreferrer" aria-label="TECHVIMAN official website founded by Abadurrahman" className="hover:text-white transition p-2 rounded-full bg-slate-900 border border-slate-800">
                   <Globe className="w-4 h-4" />
                 </a>
-                <a href="mailto:contact@techviman.com" aria-label="Email Abadurrahman at contact@techviman.com" className="hover:text-white transition p-2 rounded-lg bg-slate-900 border border-slate-800">
+                <a href="mailto:contact@techviman.com" aria-label="Email Abadurrahman at contact@techviman.com" className="hover:text-white transition p-2 rounded-full bg-slate-900 border border-slate-800">
                   <Mail className="w-4 h-4" />
                 </a>
               </div>
+              <Link href="/resume" className="ml-auto text-xs text-slate-400 hover:text-blue-300 transition">View résumé <ArrowRight className="inline w-3.5 h-3.5 ml-1" /></Link>
             </div>
           </div>
 
@@ -180,7 +166,7 @@ export default function HomePage() {
             </p>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white">MORE THAN A DEVELOPER.</h2>
             <blockquote className="text-xl sm:text-2xl font-bold text-slate-200 border-l-4 border-blue-500 pl-4 py-1 italic">
-              "I don't just write code. I turn ideas into products."
+              &ldquo;I don&rsquo;t just write code. I turn ideas into products.&rdquo;
             </blockquote>
             <p className="text-slate-300 leading-relaxed text-sm sm:text-base">
               Combining Computer Science engineering fundamentals with product design, artificial intelligence, and business strategy to engineer high-value digital solutions.
@@ -623,7 +609,7 @@ export default function HomePage() {
             <div className="lg:col-span-6 space-y-6">
               <p className="text-xs font-mono uppercase tracking-widest text-blue-400 font-bold">GET IN TOUCH</p>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-white">HAVE AN IDEA?</h2>
-              <p className="text-lg text-slate-300 font-medium">Let's build something meaningful together.</p>
+              <p className="text-lg text-slate-300 font-medium">Let&apos;s build something meaningful together.</p>
               <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
                 Whether you have a web application project, a WebAR product concept, an AI tool requirement, or want to collaborate with TECHVIMAN, feel free to reach out directly.
               </p>

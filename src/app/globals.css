@@ -1,32 +1,96 @@
 @import "tailwindcss";
 
+@theme {
+  --color-slate-50: #f5f3ed;
+  --color-slate-100: #e7e4da;
+  --color-slate-200: #d0ccbf;
+  --color-slate-300: #b8b3a5;
+  --color-slate-400: #979184;
+  --color-slate-500: #777263;
+  --color-slate-600: #5e5a4d;
+  --color-slate-700: #46433a;
+  --color-slate-800: #302e28;
+  --color-slate-900: #211f1b;
+  --color-slate-950: #131310;
+  --color-blue-50: #fbf2ed;
+  --color-blue-100: #f5e1d6;
+  --color-blue-200: #ecc4b0;
+  --color-blue-300: #e1a98e;
+  --color-blue-400: #d9906e;
+  --color-blue-500: #ce7957;
+  --color-blue-600: #b96240;
+  --color-blue-700: #964c32;
+  --color-blue-800: #713a29;
+  --color-blue-900: #4a2b20;
+  --color-cyan-50: #f1f3e9;
+  --color-cyan-100: #e3e8d2;
+  --color-cyan-200: #cbd4b0;
+  --color-cyan-300: #b2bf8e;
+  --color-cyan-400: #a4b17b;
+  --color-cyan-500: #899663;
+  --color-cyan-600: #707c50;
+  --color-cyan-700: #59623f;
+  --color-cyan-800: #434a31;
+  --color-cyan-900: #303625;
+  --color-violet-50: #fbf6e8;
+  --color-violet-100: #f3e9c9;
+  --color-violet-200: #e8d59b;
+  --color-violet-300: #d9bd70;
+  --color-violet-400: #c7a651;
+  --color-violet-500: #b18f3f;
+  --color-violet-600: #927337;
+  --color-violet-700: #725a2d;
+  --color-violet-800: #554424;
+  --color-violet-900: #3d321f;
+  --color-indigo-50: #f7f1e7;
+  --color-indigo-100: #eee2cc;
+  --color-indigo-200: #dfc99e;
+  --color-indigo-300: #cfb475;
+  --color-indigo-400: #c1a05b;
+  --color-indigo-500: #aa8848;
+  --color-indigo-600: #8d6e3a;
+  --color-indigo-700: #6e5630;
+  --color-indigo-800: #534227;
+  --color-indigo-900: #3b311f;
+  --color-purple-50: #f8f2ed;
+  --color-purple-100: #efdfd3;
+  --color-purple-200: #e1c4af;
+  --color-purple-300: #d3a88d;
+  --color-purple-400: #c79576;
+  --color-purple-500: #b47c5e;
+  --color-purple-600: #966448;
+  --color-purple-700: #77503a;
+  --color-purple-800: #5a3d2e;
+  --color-purple-900: #402f25;
+}
+
 @layer base {
   :root {
-    --bg-main: #08090e;
-    --bg-card: #0f121d;
-    --bg-card-hover: #161b2c;
-    --border-color: #1e2638;
-    --border-glow: #3b82f640;
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
-    --accent-blue: #3b82f6;
-    --accent-cyan: #06b6d4;
-    --accent-violet: #8b5cf6;
+    --bg-main: #131310;
+    --bg-card: #1b1a16;
+    --bg-card-hover: #25231e;
+    --border-color: #302e28;
+    --border-glow: #ce795740;
+    --text-primary: #f5f3ed;
+    --text-secondary: #b8b3a5;
+    --text-muted: #858071;
+    --accent-blue: #ce7957;
+    --accent-cyan: #a4b17b;
+    --accent-violet: #c7a651;
   }
 
   .light {
-    --bg-main: #f8fafc;
-    --bg-card: #ffffff;
-    --bg-card-hover: #f1f5f9;
-    --border-color: #e2e8f0;
-    --border-glow: #3b82f630;
-    --text-primary: #0f172a;
-    --text-secondary: #475569;
-    --text-muted: #64748b;
-    --accent-blue: #2563eb;
-    --accent-cyan: #0891b2;
-    --accent-violet: #7c3aed;
+    --bg-main: #f3f0e8;
+    --bg-card: #fcfaf5;
+    --bg-card-hover: #ebe7dc;
+    --border-color: #ded8c9;
+    --border-glow: #b9624030;
+    --text-primary: #25241f;
+    --text-secondary: #5e5a4d;
+    --text-muted: #777263;
+    --accent-blue: #a95035;
+    --accent-cyan: #657747;
+    --accent-violet: #896b34;
   }
 
   html {
@@ -44,6 +108,12 @@
     font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
     overflow-x: hidden;
     transition: background-color 0.3s ease, color 0.3s ease;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: #ce7957;
+    color: #131310;
   }
 }
 
@@ -58,26 +128,26 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #49463d;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #625e51;
 }
 
 /* Grid & Glow Effects */
 .bg-grid-pattern {
   background-size: 40px 40px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(to right, rgba(245, 243, 237, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(245, 243, 237, 0.03) 1px, transparent 1px);
 }
 
 .light .bg-grid-pattern {
   background-image: 
-    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+    linear-gradient(to right, rgba(37, 36, 31, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(37, 36, 31, 0.04) 1px, transparent 1px);
 }
 
 .glass-card {
@@ -88,24 +158,24 @@
 }
 
 .glass-card:hover {
-  border-color: rgba(59, 130, 246, 0.4);
-  box-shadow: 0 0 25px -5px rgba(59, 130, 246, 0.15);
+  border-color: rgba(206, 121, 87, 0.4);
+  box-shadow: 0 0 25px -5px rgba(206, 121, 87, 0.12);
 }
 
 .glow-gradient-text {
-  background: linear-gradient(135deg, #f8fafc 30%, #3b82f6 70%, #06b6d4 100%);
+  background: linear-gradient(120deg, #f5f3ed 15%, #e0a17e 70%, #a4b17b 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .light .glow-gradient-text {
-  background: linear-gradient(135deg, #0f172a 30%, #2563eb 70%, #0891b2 100%);
+  background: linear-gradient(120deg, #25241f 15%, #a95035 70%, #657747 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .techviman-gradient-text {
-  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #38bdf8 100%);
+  background: linear-gradient(135deg, #e0a17e 0%, #c7a651 50%, #a4b17b 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

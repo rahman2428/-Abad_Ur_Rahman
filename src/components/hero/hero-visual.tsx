@@ -35,7 +35,7 @@ export function HeroVisual() {
     }> = [];
 
     const numParticles = Math.min(Math.floor(width / 15), 45);
-    const colors = ["#3b82f6", "#06b6d4", "#8b5cf6", "#60a5fa"];
+    const colors = ["#d9906e", "#a4b17b", "#c7a651", "#e7e4da"];
 
     for (let i = 0; i < numParticles; i++) {
       particles.push({
@@ -64,7 +64,7 @@ export function HeroVisual() {
 
       // Draw faint grid lines
       const gridSize = 40;
-      ctx.strokeStyle = "rgba(59, 130, 246, 0.05)";
+      ctx.strokeStyle = "rgba(206, 121, 87, 0.07)";
       ctx.lineWidth = 1;
 
       for (let x = 0; x < width; x += gridSize) {
@@ -83,8 +83,8 @@ export function HeroVisual() {
 
       // Draw mouse light gradient glow
       const radialGlow = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 200);
-      radialGlow.addColorStop(0, "rgba(6, 182, 212, 0.15)");
-      radialGlow.addColorStop(0.5, "rgba(59, 130, 246, 0.08)");
+      radialGlow.addColorStop(0, "rgba(164, 177, 123, 0.14)");
+      radialGlow.addColorStop(0.5, "rgba(206, 121, 87, 0.08)");
       radialGlow.addColorStop(1, "rgba(0, 0, 0, 0)");
 
       ctx.fillStyle = radialGlow;
@@ -114,7 +114,7 @@ export function HeroVisual() {
             ctx.beginPath();
             ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(59, 130, 246, ${1 - dist / 110})`;
+            ctx.strokeStyle = `rgba(206, 121, 87, ${0.22 * (1 - dist / 110)})`;
             ctx.lineWidth = 0.6;
             ctx.stroke();
           }
@@ -135,7 +135,7 @@ export function HeroVisual() {
 
   return (
     <div
-      className="relative w-full h-full min-h-[380px] lg:min-h-[480px] rounded-3xl overflow-hidden glass-card flex items-center justify-center p-4 border border-slate-800/80 bg-slate-950/60 shadow-2xl"
+      className="relative w-full h-full min-h-[380px] lg:min-h-[480px] rounded-[2rem] overflow-hidden glass-card flex items-center justify-center p-4 border border-slate-800/80 bg-slate-950/60 shadow-2xl"
       role="img"
       aria-label="Interactive product overview of Abadurrahman's TECHVIMAN work, including WebAR restaurant menus, AI background removal, and SaaS products"
     >

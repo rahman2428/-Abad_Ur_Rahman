@@ -35,7 +35,7 @@ export function Footer() {
             <Link href="/" className="inline-block">
               <h2 className="text-2xl font-extrabold text-white tracking-wider">ABADURRAHMAN</h2>
             </Link>
-            <p className="text-sm text-blue-400 font-mono">Developer • Entrepreneur • Builder • Technology Creator</p>
+            <p className="text-sm text-blue-300">Developer · Entrepreneur · Builder · Technology Creator</p>
             <p className="text-xs text-slate-400 max-w-md leading-relaxed">
               Building WebAR products, AI tools, full-stack applications, and scaling TECHVIMAN startup initiatives. CS Engineering Student turning ideas into working digital businesses.
             </p>
@@ -51,13 +51,13 @@ export function Footer() {
             <p className="text-xs font-bold text-slate-200 uppercase tracking-widest font-mono">Platform Navigation</p>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/" className="hover:text-blue-400 transition">Home</Link>
+                <Link href="/" className="hover:text-blue-300 transition">Home</Link>
               </li>
               <li>
-                <Link href="/about" className="hover:text-blue-400 transition">About Abadurrahman</Link>
+                <Link href="/about" className="hover:text-blue-300 transition">About Abadurrahman</Link>
               </li>
               <li>
-                <Link href="/projects" className="hover:text-blue-400 transition">Work & Projects</Link>
+                <Link href="/projects" className="hover:text-blue-300 transition">Work & Projects</Link>
               </li>
               <li>
                 <Link href="/techviman" className="text-cyan-400 hover:text-cyan-300 font-semibold flex items-center gap-1">
@@ -65,22 +65,22 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/skills" className="hover:text-blue-400 transition">Engineering Skills</Link>
+                <Link href="/skills" className="hover:text-blue-300 transition">Engineering Skills</Link>
               </li>
               <li>
-                <Link href="/lab" className="hover:text-blue-400 transition">Technology Lab</Link>
+                <Link href="/lab" className="hover:text-blue-300 transition">Technology Lab</Link>
               </li>
               <li>
-                <Link href="/blog" className="hover:text-blue-400 transition">Daily Knowledge Blog</Link>
+                <Link href="/blog" className="hover:text-blue-300 transition">Daily Knowledge Blog</Link>
               </li>
               <li>
-                <Link href="/now" className="hover:text-blue-400 transition">Currently Building</Link>
+                <Link href="/now" className="hover:text-blue-300 transition">Currently Building</Link>
               </li>
               <li>
-                <Link href="/resume" className="hover:text-blue-400 transition">Resume</Link>
+                <Link href="/resume" className="hover:text-blue-300 transition">Resume</Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-blue-400 transition">Contact</Link>
+                <Link href="/contact" className="hover:text-blue-300 transition">Contact</Link>
               </li>
             </ul>
           </div>
@@ -97,7 +97,7 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-slate-400 hover:text-white transition group"
                 >
-                  <span className="p-1.5 rounded-lg bg-slate-900 border border-slate-800 group-hover:border-blue-500/50 group-hover:text-blue-400 transition">
+                  <span className="p-1.5 rounded-lg bg-slate-900 border border-slate-800 group-hover:border-blue-500/50 group-hover:text-blue-300 transition">
                     {getSocialIcon(link.name)}
                   </span>
                   <span>{link.name}</span>
