@@ -222,14 +222,33 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
           <p className="text-lg text-slate-300 font-medium leading-relaxed">{post.subtitle}</p>
 
-          {/* Author Card Header */}
-          <div className="flex items-center gap-4 p-4 rounded-2xl bg-slate-900 border border-slate-800">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-600 to-cyan-500 flex items-center justify-center font-bold text-white text-base">
-              A
-            </div>
-            <div>
-              <p className="text-sm font-bold text-white">{post.author.name}</p>
-              <p className="text-xs text-slate-400 font-mono">{post.author.role}</p>
+          {/* Photo section */}
+          <div className="overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/80 shadow-[0_20px_60px_rgba(15,23,42,0.45)]">
+            <div className="grid md:grid-cols-[220px_1fr] gap-4 md:gap-0 items-center">
+              <div className="p-4 md:p-6">
+                <div className="relative overflow-hidden rounded-2xl border border-slate-700 bg-slate-950">
+                  <Image
+                    src={post.author.avatar}
+                    alt={post.author.name}
+                    width={320}
+                    height={380}
+                    className="h-52 w-full object-cover md:h-64"
+                  />
+                </div>
+              </div>
+
+              <div className="px-4 pb-6 pt-0 md:px-8 md:pb-8 md:pt-0">
+                <p className="text-[10px] font-mono uppercase tracking-[0.28em] text-blue-400">Author</p>
+                <h2 className="mt-3 text-3xl font-black tracking-tight text-white sm:text-4xl">
+                  ABADURRAHMAN
+                </h2>
+                <p className="mt-3 max-w-xl text-sm leading-7 text-slate-300">
+                  {post.author.role} • Building AI, Web experiences, and future-facing digital products.
+                </p>
+                <p className="mt-3 text-xs font-mono text-slate-400">
+                  {post.author.bio}
+                </p>
+              </div>
             </div>
           </div>
         </div>

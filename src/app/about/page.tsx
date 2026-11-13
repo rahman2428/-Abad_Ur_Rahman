@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { personalProfile } from "@/data/profile";
 import { GraduationCap, Code, Rocket, CheckCircle2, Sparkles, ArrowRight } from "lucide-react";
 import Link from "next/link";
@@ -24,6 +25,35 @@ export default function AboutPage() {
         <p className="text-lg text-slate-300 leading-relaxed font-medium">
           Computer Science Engineering student, software developer, startup founder, and technology creator based in India.
         </p>
+      </div>
+
+      {/* Profile Photo Section */}
+      <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-8 items-center rounded-3xl border border-slate-800 bg-slate-950/70 p-5 sm:p-8">
+        <div className="relative overflow-hidden rounded-3xl border border-slate-700 bg-slate-900 shadow-[0_20px_60px_rgba(15,23,42,0.55)]">
+          <Image
+            src="/my_photo/abadurrahman.jpg"
+            alt="Portrait of Abadurrahman"
+            width={900}
+            height={1100}
+            className="h-[380px] w-full object-cover sm:h-[440px]"
+            priority
+          />
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-mono font-bold uppercase tracking-[0.28em] text-blue-400">ABOUT</p>
+          <h2 className="text-3xl font-black text-white sm:text-4xl">ABADURRAHMAN</h2>
+          <p className="text-base text-slate-300 leading-relaxed">
+            I am a developer, builder, and founder focused on web technologies, AI systems, product design, and entrepreneurship. I enjoy turning ideas into tangible digital experiences that are useful, performant, and memorable.
+          </p>
+          <div className="flex flex-wrap gap-2 pt-2">
+            {aboutSection.interests.map((interest) => (
+              <span key={interest} className="text-xs font-mono px-2.5 py-1.5 rounded-full bg-slate-900 border border-slate-800 text-slate-300">
+                {interest}
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Grid: Who I Am & What I Do */}
