@@ -24,22 +24,22 @@ export const socialLinks: SocialLink[] = [
   {
     id: "linkedin",
     name: "LinkedIn",
-    url: "https://www.linkedin.com/in/abadur-rahman-056582312/",
+    url: "https://www.linkedin.com/in/abadurrahman/",
     handle: "Abadurrahman",
     iconName: "Linkedin",
   },
   {
     id: "x",
     name: "X (Twitter)",
-    url: "https://x.com/",
-    handle: "@abadurrahman",
+    url: "https://x.com/AbadUrRahman24",
+    handle: "@AbadUrRahman24",
     iconName: "Twitter",
   },
   {
     id: "instagram",
     name: "Instagram",
-    url: "https://www.instagram.com/abadurrahman/",
-    handle: "@abadurrahman",
+    url: "https://www.instagram.com/abadurrahman_24/",
+    handle: "@abadurrahman_24",
     iconName: "Instagram",
   },
   {
