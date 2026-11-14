@@ -12,9 +12,10 @@ export const SITE_OG_DESCRIPTION =
 
 export const SOCIAL_PROFILES = {
   github: "https://github.com/rahman2428",
-  linkedin: "https://www.linkedin.com/in/abadur-rahman-056582312/",
-  instagram: "https://www.instagram.com/abadurrahman/",
+  linkedin: "https://www.linkedin.com/in/abadurrahman/",
+  instagram: "https://www.instagram.com/abadurrahman_24/",
   techviman: "https://techviman.com/",
+  twitter: "https://x.com/AbadUrRahman24",
 } as const;
 
 export function absoluteUrl(path = "/"): string {

@@ -101,7 +101,7 @@ export default function ContactPage() {
               <a href="https://github.com/rahman2428" target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-white flex items-center gap-1.5 transition">
                 <IconGithub className="w-3.5 h-3.5" /> GitHub
               </a>
-              <a href="https://www.linkedin.com/in/abadur-rahman-056582312/" target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-white flex items-center gap-1.5 transition">
+              <a href="https://www.linkedin.com/in/abadurrahman/" target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-white flex items-center gap-1.5 transition">
                 <IconLinkedin className="w-3.5 h-3.5" /> LinkedIn
               </a>
             </div>

@@ -133,7 +133,7 @@ export default function HomePage() {
                 <a href="https://github.com/rahman2428" target="_blank" rel="noopener noreferrer" aria-label="Abadurrahman on GitHub" className="hover:text-blue-300 transition p-2 rounded-full bg-slate-900 border border-slate-800">
                   <IconGithub className="w-4 h-4" />
                 </a>
-                <a href="https://www.linkedin.com/in/abadur-rahman-056582312/" target="_blank" rel="noopener noreferrer" aria-label="Abadurrahman on LinkedIn" className="hover:text-blue-300 transition p-2 rounded-full bg-slate-900 border border-slate-800">
+                <a href="https://www.linkedin.com/in/abadurrahman/" target="_blank" rel="noopener noreferrer" aria-label="Abadurrahman on LinkedIn" className="hover:text-blue-300 transition p-2 rounded-full bg-slate-900 border border-slate-800">
                   <IconLinkedin className="w-4 h-4" />
                 </a>
                 <a href="https://techviman.com/" target="_blank" rel="noopener noreferrer" aria-label="TECHVIMAN official website founded by Abadurrahman" className="hover:text-white transition p-2 rounded-full bg-slate-900 border border-slate-800">
@@ -659,7 +659,7 @@ export default function HomePage() {
                       required
                       value={contactForm.name}
                       onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
-                      placeholder="e.g. Alex Johnson"
+                      placeholder="e.g. Abad Ur Rahman"
                       className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-100 text-sm focus:outline-none focus:border-blue-500 transition"
                     />
                   </div>
@@ -671,7 +671,7 @@ export default function HomePage() {
                       required
                       value={contactForm.email}
                       onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
-                      placeholder="alex@company.com"
+                      placeholder="rahman@company.com"
                       className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-100 text-sm focus:outline-none focus:border-blue-500 transition"
                     />
                   </div>
