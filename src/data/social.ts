@@ -46,7 +46,7 @@ export const socialLinks: SocialLink[] = [
     id: "email",
     name: "Email",
     url: "mailto:contact@techviman.com",
-    handle: "contact@techviman.com",
+    handle: "abadurrahman2428@gmail.com",
     iconName: "Mail",
   },
 ];
